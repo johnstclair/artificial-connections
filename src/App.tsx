@@ -10,10 +10,12 @@ function App() {
 
   return (
   <>
-      {blocks.map((word) => {
-        return <button>{word}</button>
-        console.log({word})
-      })}
+      <div className="button-grid-container">
+        {blocks.map((word) => {
+          return <button className="button-grid">{word}</button>
+          console.log({word})
+        })}
+      </div>
   </>
   );
 }
