@@ -7,5 +7,7 @@
 .button-grid {
   background: #FF00FF;
   color: #FFFFFF;
-
+  padding: 5%;
+  border-radius: 15px;
+  margin: 3%;
 }
