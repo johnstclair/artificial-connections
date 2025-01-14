@@ -8,7 +8,7 @@ function App() {
   const [selected, setSelected] = useState<(string | boolean)[]>([]);
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
 
-  const [argue, setArgue] = useState<string>("");
+  const [guess, setGuess] = useState<string>("");
 
   console.log(selected);
 
@@ -39,27 +39,47 @@ function App() {
     }
   }
 
-  function handleSubmit() {
+  async function handleSubmit() {
     if (selected.length != 4) {
       return;
     }
-    console.log(selected + " and " + argue);
 
-    setArgue("");
-    selected.map((s) => {
-      let temp = [...blocks];
-      temp[temp.findIndex(block => block[0] == s)][1] = false;
-    })
-    setSelected([])
+    const msg = await invoke('check_guess', { guess: guess });
+
+    console.log(msg);
+
+    if (msg != "false") {
+      const temp = [...blocks];
+        /*
+        setBlocks(blocks.filter(b => 
+          b[0] != s
+        ))
+        */
+      for (let i = 0; i < 4; i++) {
+        console.log(temp[temp.findIndex(block => block[1])]);
+        temp.splice(temp.findIndex(block => block[1]),1);
+      }
+
+      console.log(temp)
+
+      setBlocks(temp);
+/*
+      selected.map((s) => {
+        let temp = [...blocks];
+        temp[temp.findIndex(block => block[0] == s)][1] = false;
+      })
+*/
+      setSelected([])
+    }
+
+    setGuess("");
   }
 
   function handleShuffle() {
     let temp = [...blocks];
     let currentIndex = blocks.length;
 
-    // While there remain elements to shuffle...
     while (currentIndex != 0) {
-
       let randomIndex = Math.floor(Math.random() * currentIndex);
       currentIndex--;
 
@@ -79,7 +99,7 @@ function App() {
         })}
       </div>
       <button onClick={() => handleSubmit()}>SUBMIT</button>
-      <input onChange={(e) => {setArgue(e.target.value)}}></input>
+      <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
       <button onClick={() => handleShuffle()}>SHUFFLE</button>
   </>
   );
