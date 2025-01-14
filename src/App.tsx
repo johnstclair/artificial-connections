@@ -53,6 +53,22 @@ function App() {
     setSelected([])
   }
 
+  function handleShuffle() {
+    let temp = [...blocks];
+    let currentIndex = blocks.length;
+
+    // While there remain elements to shuffle...
+    while (currentIndex != 0) {
+
+      let randomIndex = Math.floor(Math.random() * currentIndex);
+      currentIndex--;
+
+      [temp[currentIndex], temp[randomIndex]] = [
+        temp[randomIndex], temp[currentIndex]];
+    }
+    setBlocks(temp);
+  }
+
   return (
   <>
       <div className="button-grid-container">
@@ -64,6 +80,7 @@ function App() {
       </div>
       <button onClick={() => handleSubmit()}>SUBMIT</button>
       <input onChange={(e) => {setArgue(e.target.value)}}></input>
+      <button onClick={() => handleShuffle()}>SHUFFLE</button>
   </>
   );
 }
