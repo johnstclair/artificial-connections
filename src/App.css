@@ -18,3 +18,8 @@ button {
   border-radius: 15px;
   margin: 3%;
 }
+
+.selected {
+  background: #020100;
+  color: #EFEEE6;
+}

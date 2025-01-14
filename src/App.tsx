@@ -19,11 +19,11 @@ function App() {
   }, []);
 
   function handleSelection(index: number) {
-    let temp = blocks;
+    let temp = [...blocks];
     temp[index][1] =  !temp[index][1];
     setSelected(temp);
 
-    console.log(blocks)
+    console.log(blocks);
   }
 
   function handleSubmit() {
@@ -40,7 +40,7 @@ function App() {
   <>
       <div className="button-grid-container">
         {blocks.map((item, index) => {
-          return <button key={index} onClick={(e) => handleSelection(index)} className="button-grid">{item[0].toUpperCase()}</button>
+          return <button key={index} onClick={(e) => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>{item[0].toUpperCase()}</button>
         })}
       </div>
       <button >SUBMIT</button>
