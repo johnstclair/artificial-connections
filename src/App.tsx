@@ -5,10 +5,10 @@ import "./App.css";
 
 function App() {
   const wordList = ["veil","shake","cable","vision","arrange","offspring","fund","ridge","authorize","parade","suffering","impound","bad","concentration","slippery","artichoke"];
-  const [selected, setSelected] = useState(new Array(4).fill(""));
+  const [selected, setSelected] = useState<(string | boolean)[]>([]);
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
 
-  console.log("selected " + selected);
+  console.log(selected);
 
   useEffect(() => {
     let temp: (string | boolean)[][] = [];
@@ -19,11 +19,23 @@ function App() {
   }, []);
 
   function handleSelection(index: number) {
-    let temp = [...blocks];
-    temp[index][1] =  !temp[index][1];
-    setSelected(temp);
+    if (!blocks[index][1] && selected.length < 4) {
+      let temp = [...blocks];
+      temp[index][1] = !temp[index][1];
 
-    console.log(blocks);
+      setSelected([
+        ...selected,
+        temp[index][0]
+      ]);
+    } else if (blocks[index][1]) {
+      let temp = [...blocks];
+      temp[index][1] = !temp[index][1];
+
+      setSelected(selected.filter(s =>
+        s != temp[index][0]
+      ));
+    }
+
   }
 
   function handleSubmit() {
