@@ -8,6 +8,8 @@ function App() {
   const [selected, setSelected] = useState<(string | boolean)[]>([]);
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
 
+  const [argue, setArgue] = useState<string>("");
+
   console.log(selected);
 
   useEffect(() => {
@@ -35,27 +37,33 @@ function App() {
         s != temp[index][0]
       ));
     }
-
   }
 
   function handleSubmit() {
-    let words: string[] = [];
+    if (selected.length != 4) {
+      return;
+    }
+    console.log(selected + " and " + argue);
 
-    selection.map((index, selected) => {
-      if (selected) {
-        words.push(blocks[index])
-      }
-    });
+    setArgue("");
+    selected.map((s) => {
+      let temp = [...blocks];
+      temp[temp.findIndex(block => block[0] == s)][1] = false;
+    })
+    setSelected([])
   }
 
   return (
   <>
       <div className="button-grid-container">
         {blocks.map((item, index) => {
-          return <button key={index} onClick={(e) => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>{item[0].toUpperCase()}</button>
+          return <button key={index} onClick={(e) => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
+            {item[0].toUpperCase()}
+          </button>
         })}
       </div>
-      <button >SUBMIT</button>
+      <button onClick={() => handleSubmit()}>SUBMIT</button>
+      <input onChange={(e) => {setArgue(e.target.value)}}></input>
   </>
   );
 }
