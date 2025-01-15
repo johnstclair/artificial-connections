@@ -5,13 +5,11 @@ import "./App.css";
 
 function App() {
   const wordList = ["veil","shake","cable","vision","arrange","offspring","fund","ridge","authorize","parade","suffering","impound","bad","concentration","slippery","artichoke"];
-  const [selected, setSelected] = useState<(string | boolean)[]>([]);
+  const [selected, setSelected] = useState<(string)[]>([]);
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
   const [gotten, setGotten] = useState<string[][]>([]);
 
   const [guess, setGuess] = useState<string>("");
-
-  console.log(selected);
 
   useEffect(() => {
     let temp: (string | boolean)[][] = [];
@@ -45,14 +43,11 @@ function App() {
       return;
     }
 
-    const msg = await invoke('check_guess', { guess: guess });
-
-    console.log(msg);
+    const msg: string = await invoke('check_guess', { guess: guess });
 
     if (msg != "false") {
       let temp = [...blocks];
       for (let i = 0; i < 4; i++) {
-        console.log(temp[temp.findIndex(block => block[1])]);
         temp.splice(temp.findIndex(block => block[1]),1);
       }
 
@@ -63,17 +58,17 @@ function App() {
         temp[temp.findIndex(block => block[0] == s)][1] = false;
       })
 */
-      temp = [...gotten];
-      temp.push([]);
-      const currentIndex = temp.length-1;
+      let second: string[][] = [...gotten];
+      second.push([]);
+      const currentIndex = second.length-1;
 
-      temp[currentIndex].push(msg);
+      second[currentIndex].push(msg);
 
       selected.map((s) => {
-        temp[currentIndex].push(s);
+        second[currentIndex].push(s);
       })
 
-      setGotten(temp);
+      setGotten(second);
 
       setSelected([])
     }
@@ -98,6 +93,12 @@ function App() {
   return (
   <>
       <div className="button-grid-container">
+        {gotten.map((row, index) => {
+          return <div key={index} className={`solved ${index}`}>
+            <h1>{row[0]}</h1>
+            <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
+          </div>
+        })}
         {blocks.map((item, index) => {
           return <button key={index} onClick={(e) => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
             {item[0].toUpperCase()}
