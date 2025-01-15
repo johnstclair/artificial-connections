@@ -29,7 +29,7 @@ async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, w
     message.push_str("\nIMPORTANT: Please reply: 'true' if you believe the words fit in the given catagory, if you don't think the words fit the catagory please explain why they don't fit in less then 250 characters. Thanks!");
 
     let data = json!({
-        "model": "llama3.2:latest",
+        "model": "llama3.2",
         "prompt": message,
         "stream": false,
     });
@@ -37,7 +37,7 @@ async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, w
     println!("{}",data);
 
     let client = reqwest::Client::new();
-    match client.post("http://localhost:11424")
+    match client.post("http://localhost:11434/api/generate")
         .form(&data)
         .send()
         .await

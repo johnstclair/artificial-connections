@@ -45,6 +45,8 @@ function App() {
 
     const msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
+    console.log(msg);
+
     if (msg == guess) {
       let temp = [...blocks];
       for (let i = 0; i < 4; i++) {
