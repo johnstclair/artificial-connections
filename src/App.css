@@ -23,3 +23,23 @@ button {
   background: #020100;
   color: #EFEEE6;
 }
+
+.solved {
+  width: 100%;
+}
+
+.solved.number0{
+  background: yellow;
+}
+
+.solved.number1{
+  background: green;
+}
+
+.solved.number2{
+  background: blue;
+}
+
+.solved.number3{
+  background: purple;
+}

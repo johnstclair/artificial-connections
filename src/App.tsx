@@ -45,7 +45,7 @@ function App() {
 
     const msg: string = await invoke('check_guess', { guess: guess });
 
-    if (msg != "false") {
+    if (msg == guess) {
       let temp = [...blocks];
       for (let i = 0; i < 4; i++) {
         temp.splice(temp.findIndex(block => block[1]),1);
@@ -92,13 +92,13 @@ function App() {
 
   return (
   <>
+      {gotten.map((row, index) => {
+        return <div key={index} className={`solved number${index}`}>
+          <h1>{row[0]}</h1>
+          <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
+        </div>
+      })}
       <div className="button-grid-container">
-        {gotten.map((row, index) => {
-          return <div key={index} className={`solved ${index}`}>
-            <h1>{row[0]}</h1>
-            <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
-          </div>
-        })}
         {blocks.map((item, index) => {
           return <button key={index} onClick={(e) => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
             {item[0].toUpperCase()}

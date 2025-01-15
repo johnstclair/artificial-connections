@@ -1,7 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
 fn check_guess(guess: &str) -> String {
-    "Hello from rust".into()
+    guess.into()
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
