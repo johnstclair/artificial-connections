@@ -1,6 +1,7 @@
 // Learn more about Tauri commands at https://tauri.app/develop/calling-rust/
 #[tauri::command]
-fn check_guess(guess: &str) -> String {
+fn check_guess(guess: &str, selected: Vec<String>, gotten: Vec<String>, word_list: Vec<String>) -> String {
+    println!("this is a test {guess} {selected:?} {gotten:?} {word_list:?}");
     guess.into()
 }
 

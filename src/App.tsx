@@ -4,7 +4,7 @@ import { invoke } from "@tauri-apps/api/core";
 import "./App.css";
 
 function App() {
-  const wordList = ["veil","shake","cable","vision","arrange","offspring","fund","ridge","authorize","parade","suffering","impound","bad","concentration","slippery","artichoke"];
+  const wordList: string[] = ["veil","shake","cable","vision","arrange","offspring","fund","ridge","authorize","parade","suffering","impound","bad","concentration","slippery","artichoke"];
   const [selected, setSelected] = useState<(string)[]>([]);
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
   const [gotten, setGotten] = useState<string[][]>([]);
@@ -43,7 +43,7 @@ function App() {
       return;
     }
 
-    const msg: string = await invoke('check_guess', { guess: guess });
+    const msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
     if (msg == guess) {
       let temp = [...blocks];
@@ -100,7 +100,7 @@ function App() {
       })}
       <div className="button-grid-container">
         {blocks.map((item, index) => {
-          return <button key={index} onClick={(e) => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
+          return <button key={index} onClick={() => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
             {item[0].toUpperCase()}
           </button>
         })}
