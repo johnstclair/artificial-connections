@@ -1,3 +1,5 @@
+use serde_json::{json};
+
 fn convert_vect_to_string(ve: &Vec<&str>) -> String {
     let mut temp: String = "".to_owned();
     for i in 0..ve.len() {
@@ -18,7 +20,7 @@ fn convert_solved_to_string(solv: Vec<&str>) -> String {
 }
 
 #[tauri::command]
-fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> String {
+async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> Result<String,String> {
     let mut message = "Hello, you are judging a game.\nYour job is to verify if a group of four words fit in a given catagory.\nHere is the catagory: ".to_owned();
     message.push_str(guess);
     message.push_str("\nHere are the words: ");
@@ -26,7 +28,34 @@ fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_li
     message.push_str(&selected_string);
     message.push_str("\nIMPORTANT: Please reply: 'true' if you believe the words fit in the given catagory, if you don't think the words fit the catagory please explain why they don't fit in less then 250 characters. Thanks!");
 
-    println!("{}",message);
+    let data = json!({
+        "model": "llama3.2:latest",
+        "prompt": message,
+        "stream": false,
+    });
+
+    println!("{}",data);
+
+    let client = reqwest::Client::new();
+    match client.post("http://localhost:11424")
+        .form(&data)
+        .send()
+        .await
+    {
+        Ok(response) => {
+            if response.status().is_success() {
+                match response.text().await {
+                    Ok(body) => Ok(body), // Return the response body as a string
+                    Err(err) => Err(format!("Failed to read response text: {}", err)),
+                }
+            } else {
+                Err(format!("API returned an error: {}", response.status()))
+            }
+        }
+        Err(err) => Err(format!("Failed to make API request: {}", err)),
+    }
+/*
+    println!("{:?}", res);
 
     for i in 0..gotten.len() {
         let selected_string: String = convert_solved_to_string(gotten[i].clone());
@@ -36,6 +65,7 @@ fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_li
     //println!("this is a test {guess} {selected:?} {gotten:?} {word_list:?}");
     let mut message: &str = "";
     guess.into()
+*/
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
