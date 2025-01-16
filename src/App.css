@@ -3,8 +3,9 @@
 button {
   background: #EFEEE6;
   color: #020100;
-  font-weight: 1200;
+  font-weight: "bold";
   font-family: 'Bebas Neue', sans-serif;
+  border: none;
 }
 
 .button-grid-container {
@@ -20,7 +21,7 @@ button {
 
 .life{
   display: grid;
-  grid-template-rows: repeat(4,1fr);
+  grid-template-columns: repeat(4,1fr);
 }
 
 .life-dot {

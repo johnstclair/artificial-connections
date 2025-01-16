@@ -74,12 +74,7 @@ function App() {
       }
 
       setBlocks(temp);
-/*
-      selected.map((s) => {
-        let temp = [...blocks];
-        temp[temp.findIndex(block => block[0] == s)][1] = false;
-      })
-*/
+
       let second: string[][] = [...gotten];
       second.push([]);
       const currentIndex = second.length-1;
@@ -102,6 +97,17 @@ function App() {
 
     setGuess("");
     setNotification(msg);
+  }
+
+  function handleDeselect() {
+    let temp = [...blocks];
+
+    selected.map((s) => {
+      temp[temp.findIndex(block => block[0] == s)][1] = false;
+    })
+
+    setBlocks(temp);
+    setSelected([]);
   }
 
   function handleShuffle() {
@@ -141,6 +147,7 @@ function App() {
       <button onClick={() => handleSubmit()}>SUBMIT</button>
       <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
       <button onClick={() => handleShuffle()}>SHUFFLE</button>
+      <button onClick={() => handleDeselect()}>DESELECT</button>
       <h1>{notification}</h1>
   </>
   );
