@@ -22,12 +22,40 @@ fn convert_solved_to_string(solv: Vec<&str>) -> String {
 
 #[tauri::command]
 async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> Result<String,String> {
+    /*
     let mut message = "Hello, you are judging a game.\nYour job is to verify if a group of four words fit in a given catagory.\nHere is the catagory: \"".to_owned();
     message.push_str(guess);
     message.push_str("\"\nHere are the words: \"");
     let selected_string = convert_vect_to_string(&selected);
     message.push_str(&selected_string);
     message.push_str("\"\nVERY VERY IMPORTANT: If you don't think the given words fit in the given catagory please explain why they don't fit in less then 250 characters with no newlines, when explaing use a passive and consice voice like 'word XXX does not fit'. Thanks, and have fun! EVEN MORE IMPORTANT!!! You MUST start your response with 'True. ' or 'False. ' based off if the user won or not");
+*/
+
+    let mut message: String = 
+"Hello! Your a judge filling out form for a game that is like NYT's Connections.
+
+You first need to look at the submitted category, then check if the four submitted words fit the category.
+
+IMPORTANT, please follow this format to answer:
+
+The first word MUST be either a 'True' or a 'False', followed by a '. ' the period and the space are important
+
+Answer 'True. ' if the words fit in the given category
+Answer 'False. ' if the words do not fit in the given category
+
+Please use only plain text in your response
+
+Next give a less than 50 character concise passive voiced reason for you answer, make it ONE sentence
+
+Thanks!
+
+Here is the category: ".to_owned();
+    message.push_str(guess);
+    message.push_str("
+Here are the words: ");
+    message.push_str(&convert_vect_to_string(&selected));
+    message.push_str("
+Please have fun!");
 
     let data = json!({
         "model": "llama3.1",
