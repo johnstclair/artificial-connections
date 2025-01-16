@@ -11,6 +11,7 @@ function App() {
   const [life, setLife] = useState<number>(4);
 
   const [guess, setGuess] = useState<string>("");
+  const [notification, setNotification] = useState("");
 
   useEffect(() => {
     let temp: (string | boolean)[][] = [];
@@ -46,6 +47,18 @@ function App() {
 
     let msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
+    console.log(msg);
+
+    const trueIndex = msg.indexOf("True.");
+    const falseIndex = msg.indexOf("False.");
+    let startIndex;
+    if (trueIndex !== -1 && (falseIndex === -1 || trueIndex < falseIndex)) {
+        startIndex = trueIndex;
+    } else if (falseIndex !== -1) {
+        startIndex = falseIndex;
+    } 
+    
+    msg = msg.substring(startIndex);
     msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z]*$/, "").toLowerCase().trim();
     let words: string[] = msg.split(' ');
     let result: string = words[0];
@@ -53,8 +66,6 @@ function App() {
     msg = words.slice(1).join(' ');
 
     console.log(msg);
-
-    result = "t";
 
     if (result.toLowerCase() == "true") {
       let temp = [...blocks];
@@ -81,7 +92,7 @@ function App() {
 
       setGotten(second);
 
-      setSelected([])
+      setSelected([]);
     } else {
       setLife(life-1);
       if (life==1) {
@@ -90,6 +101,7 @@ function App() {
     }
 
     setGuess("");
+    setNotification(msg);
   }
 
   function handleShuffle() {
@@ -129,6 +141,7 @@ function App() {
       <button onClick={() => handleSubmit()}>SUBMIT</button>
       <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
       <button onClick={() => handleShuffle()}>SHUFFLE</button>
+      <h1>{notification}</h1>
   </>
   );
 }

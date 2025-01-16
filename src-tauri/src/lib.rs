@@ -38,10 +38,16 @@ You first need to look at the submitted category, then check if the four submitt
 
 IMPORTANT, please follow this format to answer:
 
-The first word MUST be either a 'True' or a 'False', followed by a '. ' the period and the space are important
+If you don't follow the format you will be fired and thrown in a grinder.
+
+The first word MUST be either a 'True' or a 'False', followed by a '. ' the period and the space are IMPORTANT
 
 Answer 'True. ' if the words fit in the given category
+Example of true response:
+  True. the submitted words appear to be related to a common category, particularly 'word', as they seem unrelated in terms of meaning or context
 Answer 'False. ' if the words do not fit in the given category
+Example of false response:
+  False. the submitted words do not appear to be related to a common category, particularly 'word', as they seem unrelated in terms of meaning or context
 
 Please use only plain text in your response
 
@@ -55,10 +61,14 @@ Here is the category: ".to_owned();
 Here are the words: ");
     message.push_str(&convert_vect_to_string(&selected));
     message.push_str("
+Make sure to review the WHOLE group of words. Do not review each word indivualy, look at the whole group.
+
+And remember to start your form filled out with a 'True. ' or a 'False. '! Thanks!
+
 Please have fun!");
 
     let data = json!({
-        "model": "llama3.1",
+        "model": "llama3.2",
         "prompt": message,
         "stream": false,
     });
