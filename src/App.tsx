@@ -43,11 +43,18 @@ function App() {
       return;
     }
 
-    const msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
+    let msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
     console.log(msg);
+ 
+    let words: string[] = msg.split(' ');
+    let result: string = words[0];
+    result = result.replace(/[".]/g, '');
+    msg = words.slice(1).join(' ');
 
-    if (msg == guess) {
+    console.log(result);
+
+    if (result.toLowerCase() == "true") {
       let temp = [...blocks];
       for (let i = 0; i < 4; i++) {
         temp.splice(temp.findIndex(block => block[1]),1);

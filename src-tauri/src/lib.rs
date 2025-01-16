@@ -1,4 +1,5 @@
 use serde_json::{json};
+use serde_json::Value;
 
 fn convert_vect_to_string(ve: &Vec<&str>) -> String {
     let mut temp: String = "".to_owned();
@@ -26,7 +27,7 @@ async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, w
     message.push_str("\"\nHere are the words: \"");
     let selected_string = convert_vect_to_string(&selected);
     message.push_str(&selected_string);
-    message.push_str("\"\nVERY VERY IMPORTANT: If you don't think the given words fit in the given catagory please explain why they don't fit in less then 250 characters, when explaing use a passive and consice voice like 'word XXX does not fit'. Thanks, and have fun! EVEN MORE IMPORTANT!!! PLEASE start your response with 'true' or 'false' based off if the user won or not");
+    message.push_str("\"\nVERY VERY IMPORTANT: If you don't think the given words fit in the given catagory please explain why they don't fit in less then 250 characters with no newlines, when explaing use a passive and consice voice like 'word XXX does not fit'. Thanks, and have fun! EVEN MORE IMPORTANT!!! You MUST start your response with 'True. ' or 'False. ' based off if the user won or not");
 
     let data = json!({
         "model": "llama3.1",
@@ -45,7 +46,15 @@ async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, w
         Ok(response) => {
             if response.status().is_success() {
                 match response.text().await {
-                    Ok(body) => Ok(format!("{}",body)),
+                    Ok(body) => {
+                        let json: Value = serde_json::from_str(&body).map_err(|e| format!("Error parsing JSON: {}", e))?;
+
+                        if let Some(response_value) = json.get("response") {
+                            Ok(format!("{}", response_value))
+                        } else {
+                            Err(format!("Key 'response' not found in the response.").into())
+                        }
+                    }
                     Err(err) => Err(format!("There was an error handling the response, please report this on GitHub, thanks! - {}", err)),
                 }
             } else {
