@@ -8,6 +8,7 @@ function App() {
   const [selected, setSelected] = useState<(string)[]>([]);
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
   const [gotten, setGotten] = useState<string[][]>([]);
+  const [life, setLife] = useState<number>(4);
 
   const [guess, setGuess] = useState<string>("");
 
@@ -45,15 +46,15 @@ function App() {
 
     let msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
-    console.log(msg);
     msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z]*$/, "").toLowerCase().trim();
     let words: string[] = msg.split(' ');
     let result: string = words[0];
     result = result.replace(/[".]/g, '');
     msg = words.slice(1).join(' ');
 
-    console.log(result);
     console.log(msg);
+
+    result = "t";
 
     if (result.toLowerCase() == "true") {
       let temp = [...blocks];
@@ -81,6 +82,11 @@ function App() {
       setGotten(second);
 
       setSelected([])
+    } else {
+      setLife(life-1);
+      if (life==1) {
+        console.log("close the game please");
+      }
     }
 
     setGuess("");
@@ -114,6 +120,8 @@ function App() {
             {item[0].toUpperCase()}
           </button>
         })}
+      </div>
+      <div>
       </div>
       <button onClick={() => handleSubmit()}>SUBMIT</button>
       <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
