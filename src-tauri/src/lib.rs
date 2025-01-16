@@ -21,15 +21,15 @@ fn convert_solved_to_string(solv: Vec<&str>) -> String {
 
 #[tauri::command]
 async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> Result<String,String> {
-    let mut message = "Hello, you are judging a game.\nYour job is to verify if a group of four words fit in a given catagory.\nHere is the catagory: ".to_owned();
+    let mut message = "Hello, you are judging a game.\nYour job is to verify if a group of four words fit in a given catagory.\nHere is the catagory: \"".to_owned();
     message.push_str(guess);
-    message.push_str("\nHere are the words: ");
+    message.push_str("\"\nHere are the words: \"");
     let selected_string = convert_vect_to_string(&selected);
     message.push_str(&selected_string);
-    message.push_str("\nIMPORTANT: Please reply: 'true' if you believe the words fit in the given catagory, if you don't think the words fit the catagory please explain why they don't fit in less then 250 characters. Thanks!");
+    message.push_str("\"\nVERY VERY IMPORTANT: If you don't think the given words fit in the given catagory please explain why they don't fit in less then 250 characters, when explaing use a passive and consice voice like 'word XXX does not fit'. Thanks, and have fun! EVEN MORE IMPORTANT!!! PLEASE start your response with 'true' or 'false' based off if the user won or not");
 
     let data = json!({
-        "model": "llama3.2",
+        "model": "llama3.1",
         "prompt": message,
         "stream": false,
     });
@@ -38,21 +38,21 @@ async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, w
 
     let client = reqwest::Client::new();
     match client.post("http://localhost:11434/api/generate")
-        .form(&data)
+        .json(&data)
         .send()
         .await
     {
         Ok(response) => {
             if response.status().is_success() {
                 match response.text().await {
-                    Ok(body) => Ok(body), // Return the response body as a string
-                    Err(err) => Err(format!("Failed to read response text: {}", err)),
+                    Ok(body) => Ok(format!("{}",body)),
+                    Err(err) => Err(format!("There was an error handling the response, please report this on GitHub, thanks! - {}", err)),
                 }
             } else {
-                Err(format!("API returned an error: {}", response.status()))
+                Err(format!("There was an error communicating with Ollama, please report this on GitHub, thanks! - {}", response.status()))
             }
         }
-        Err(err) => Err(format!("Failed to make API request: {}", err)),
+        Err(err) => Err(format!("Oops! It looks like Ollama isn't started.")),
     }
 /*
     println!("{:?}", res);
