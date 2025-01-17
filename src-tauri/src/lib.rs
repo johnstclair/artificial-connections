@@ -38,8 +38,6 @@ You first need to look at the submitted category, then check if the four submitt
 
 IMPORTANT, please follow this format to answer:
 
-If you don't follow the format you will be fired and thrown in a grinder.
-
 The first word MUST be either a 'True' or a 'False', followed by a '. ' the period and the space are IMPORTANT
 
 Answer 'True. ' if the words fit in the given category
