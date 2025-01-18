@@ -40,18 +40,25 @@ IMPORTANT, please follow this format to answer:
 
 The first word MUST be either a 'True' or a 'False', followed by a '. ' the period and the space are IMPORTANT
 
-Answer 'True. ' if the words fit in the given category
+Answer 'True. ' if the all of the words fit in the given category
 Example of true response:
   True. the submitted words appear to be related to a common category, particularly 'word', as they seem unrelated in terms of meaning or context
-Answer 'False. ' if the words do not fit in the given category
+Answer 'False. ' if one (or more) of the words does not fit in the given category
 Example of false response:
   False. the submitted words do not appear to be related to a common category, particularly 'word', as they seem unrelated in terms of meaning or context
 
+Next give a less than 50 character concise passive voiced reason for you answer, make it ONE sentence
+Example of short response:
+  False. All words work, exept for 'word,' 'word' does not fit catagory because of 'reason.'
+
 Please use only plain text in your response
 
-Next give a less than 50 character concise passive voiced reason for you answer, make it ONE sentence
-
 Thanks!
+
+Here is an example of a catagory: driving terms
+Here is an example of words that fit the catagory: signal turn brake merge
+If the user submitted: signal turn brake carrot
+That wouldn't work because carrot is not a driving term.
 
 Here is the category: ".to_owned();
     message.push_str(guess);
