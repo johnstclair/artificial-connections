@@ -21,16 +21,7 @@ fn convert_solved_to_string(solv: Vec<&str>) -> String {
 }
 
 #[tauri::command]
-async fn check_guess(guess: &str, selected: Vec<&str>, gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> Result<String,String> {
-    /*
-    let mut message = "Hello, you are judging a game.\nYour job is to verify if a group of four words fit in a given catagory.\nHere is the catagory: \"".to_owned();
-    message.push_str(guess);
-    message.push_str("\"\nHere are the words: \"");
-    let selected_string = convert_vect_to_string(&selected);
-    message.push_str(&selected_string);
-    message.push_str("\"\nVERY VERY IMPORTANT: If you don't think the given words fit in the given catagory please explain why they don't fit in less then 250 characters with no newlines, when explaing use a passive and consice voice like 'word XXX does not fit'. Thanks, and have fun! EVEN MORE IMPORTANT!!! You MUST start your response with 'True. ' or 'False. ' based off if the user won or not");
-*/
-
+async fn check_guess(guess: &str, selected: Vec<&str>, _gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> Result<String,String> {
     let mut message: String = 
 "Hello! Your a judge filling out form for a game that is like NYT's Connections.
 
@@ -104,20 +95,8 @@ Please have fun!");
                 Err(format!("There was an error communicating with Ollama, please report this on GitHub, thanks! - {}", response.status()))
             }
         }
-        Err(err) => Err(format!("Oops! It looks like Ollama isn't started.")),
+        Err(_err) => Err(format!("Oops! It looks like Ollama isn't started.")),
     }
-/*
-    println!("{:?}", res);
-
-    for i in 0..gotten.len() {
-        let selected_string: String = convert_solved_to_string(gotten[i].clone());
-        //println!("{}",selected_string);
-    }
-
-    //println!("this is a test {guess} {selected:?} {gotten:?} {word_list:?}");
-    let mut message: &str = "";
-    guess.into()
-*/
 }
 
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
