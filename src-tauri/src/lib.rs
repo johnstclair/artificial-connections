@@ -46,25 +46,40 @@ Please use only plain text in your response
 
 Thanks!
 
-Here is an example of a catagory: driving terms
-Here is an example of words that fit the catagory: signal turn brake merge
-If the user submitted: signal turn brake carrot
+Here is an example of an example catagory: 'driving terms'
+Here is an example of submitted words that fit the catagory: 'signal turn brake merge'
+If the user submitted: 'signal turn brake carrot'
 That wouldn't work because carrot is not a driving term.
 
-Here is the category: ".to_owned();
+Make sure the given words fit in the catagory, and make sure the reasononing is objective, not subjective.
+For example, the catorgory: 'The words sound funny'
+Wouldn't work because the fact if the words sound funny is subjective
+
+Also, make sure the catagory is very narrow and unique, the catagory can't be general like: 'The words sound funny'
+
+Here is the category: '".to_owned();
     message.push_str(guess);
-    message.push_str("
-Here are the words: ");
+    message.push_str("'
+Here are the given words: '");
     message.push_str(&convert_vect_to_string(&selected));
-    message.push_str("
+    message.push_str("'
 Make sure to review the WHOLE group of words. Do not review each word indivualy, look at the whole group.
+
+Now, look at the full list of words the player can submit their words from: '");
+    message.push_str(&convert_vect_to_string(&word_list));
+    message.push_str("'
+Please examine the full list of words, make sure the given words are the ONLY ones to fit the given catagory of out of the full word list.
+
+This means that you should only review the given words and the given catorgory. BUT you should also check the word list to make sure the GIVEN words are unique, and the ONLY WORDS to fit in given catagory.
+
+For example, if the example catagory is: 'The words are positive'
 
 And remember to start your form filled out with a 'True. ' or a 'False. '! Thanks!
 
 Please have fun!");
 
     let data = json!({
-        "model": "llama3.1",
+        "model": "llama3.2",
         "prompt": message,
         "stream": false,
     });
