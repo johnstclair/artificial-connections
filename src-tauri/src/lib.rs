@@ -64,7 +64,7 @@ And remember to start your form filled out with a 'True. ' or a 'False. '! Thank
 Please have fun!");
 
     let data = json!({
-        "model": "llama3.2",
+        "model": "llama3.1",
         "prompt": message,
         "stream": false,
     });

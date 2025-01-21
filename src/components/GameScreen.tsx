@@ -1,4 +1,5 @@
 import { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
 
 function GameScreen() {
@@ -10,6 +11,14 @@ function GameScreen() {
 
   const [guess, setGuess] = useState<string>("");
   const [notification, setNotification] = useState("");
+
+  const navigate = useNavigate();
+
+  console.log(life);
+
+  if (life == 0) {
+    navigate("/");
+  }
 
   useEffect(() => {
     let temp: (string | boolean)[][] = [];
