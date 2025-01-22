@@ -135,7 +135,7 @@ function GameScreen() {
   <>
       {gotten.map((row, index) => {
         return <div key={index} className={`solved number${index}`}>
-          <h1>{row[0]}</h1>
+          <h3>{row[0]}</h3>
           <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
         </div>
       })}

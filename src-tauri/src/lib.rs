@@ -65,7 +65,7 @@ Here are the given words: '");
     message.push_str("'
 Make sure to review the WHOLE group of words. Do not review each word indivualy, look at the whole group.
 
-Now, look at the full list of words the player can submit their words from: '");
+Now, look at the full list of words the player can submit their words from WARNING THESE WORDS ARE NOT IN BEING SUBMITTED BY THE USER, THEY ARE WORDS THE USER CAN PULL TO CREATE THEIR GROUPS FROM: '");
     message.push_str(&convert_vect_to_string(&word_list));
     message.push_str("'
 Please examine the full list of words, make sure the given words are the ONLY ones to fit the given catagory of out of the full word list.
