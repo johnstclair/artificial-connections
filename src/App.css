@@ -1,22 +1,22 @@
-@import url('https://fonts.google.com/specimen/Bebas+Neue');
+@import url('https://fonts.googleapis.com/css2?family=Fjalla+One');
 
 button {
   background: #EFEEE6;
   color: #020100;
-  font-family: 'Bebas Neue';
+  font-family: 'Fjalla One';
   border: none;
 }
 
 .button-grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
+  margin: 2%;
 }
   
 .button-grid {
   padding-top: 16%;
   padding-bottom: 16%;
-  border-radius: 5px;
-  margin: 2.5%;
+  border-radius: 8px;
   font-weight: 900;
   font-size: 2.2vw;
 }
@@ -40,7 +40,7 @@ button {
 }
 
 .solved {
-  margin: 1%;
+  margin: 2%;
   padding: 1%;
   border-radius: 5px;
 }
