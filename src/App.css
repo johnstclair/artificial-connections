@@ -3,8 +3,7 @@
 button {
   background: #EFEEE6;
   color: #020100;
-  font-weight: "bold";
-  font-family: 'Bebas Neue', sans-serif;
+  font-family: 'Bebas Neue';
   border: none;
 }
 
@@ -14,9 +13,12 @@ button {
 }
   
 .button-grid {
-  padding: 5%;
+  padding-top: 16%;
+  padding-bottom: 16%;
   border-radius: 5px;
-  margin: 1%;
+  margin: 2.5%;
+  font-weight: 900;
+  font-size: 2.2vw;
 }
 
 .life{
