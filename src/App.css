@@ -1,20 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One');
 
+:root {
+  padding: 0;
+  margin: 0;
+}
+
 button {
   background: #EFEEE6;
   color: #020100;
-  font-family: 'Fjalla One';
   border: none;
 }
 
 .button-grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  margin: 2%;
+  gap: 1vw;
 }
   
 .button-grid {
   padding-top: 16%;
+  font-family: 'Fjalla One';
   padding-bottom: 16%;
   border-radius: 8px;
   font-weight: 900;
@@ -31,7 +36,6 @@ button {
   border-radius: 25px;
   width: 30px;
   height: 30px;
-  margin: 1%;
 }
 
 .selected {
@@ -40,9 +44,11 @@ button {
 }
 
 .solved {
-  margin: 2%;
   padding: 1%;
-  border-radius: 5px;
+  font-family: 'Fjalla One';
+  margin-top: 1%;
+  margin-bottom: 1%;
+  border-radius: 8px;
 }
 
 .solved.number0{
@@ -63,8 +69,10 @@ button {
 
 p {
   margin-top: 0;
+  font-size: 2vw;
 }
 
 h3 {
   margin-bottom: 0;
+  font-size: 3vw;
 }
