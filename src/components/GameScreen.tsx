@@ -1,10 +1,18 @@
 import { useState, useEffect } from "react";
+import { load } from '@tauri-apps/plugin-store';
 import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
+
+async function getModel() {
+  const store = await load('settings.json', { autoSave: false });
+  const val = await store.get<{value: string}>('model');
+  return val.value
+}
 
 function GameScreen() {
   const wordList: string[] = ["veil","shake","cable","vision","arrange","offspring","fund","ridge","authorize","parade","suffering","impound","bad","concentration","slippery","artichoke"];
   const [selected, setSelected] = useState<(string)[]>([]);
+  const [model, setModel] = useState<string>("");
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
   const [gotten, setGotten] = useState<string[][]>([]);
   const [life, setLife] = useState<number>(4);
@@ -14,13 +22,15 @@ function GameScreen() {
 
   const navigate = useNavigate();
 
-  console.log(life);
-
   if (life == 0) {
     navigate("/");
   }
 
   useEffect(() => {
+    getModel().then((result) => {
+      setModel(result)
+    });
+
     let temp: (string | boolean)[][] = [];
     wordList.map((word) => {
       temp.push([word,false]);
@@ -52,9 +62,7 @@ function GameScreen() {
       return;
     }
 
-    let msg: string = await invoke('check_guess', { guess: guess, selected: selected, gotten: gotten, wordList: wordList });
-
-    console.log(msg);
+    let msg: string = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
     const trueIndex = msg.indexOf("True.");
     const falseIndex = msg.indexOf("False.");
@@ -97,9 +105,6 @@ function GameScreen() {
       setSelected([]);
     } else {
       setLife(life-1);
-      if (life==1) {
-        console.log("close the game please");
-      }
     }
 
     setGuess("");

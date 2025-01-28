@@ -1,4 +1,4 @@
-use serde_json::{json};
+use serde_json::json;
 use serde_json::Value;
 
 fn convert_vect_to_string(ve: &Vec<&str>) -> String {
@@ -7,7 +7,7 @@ fn convert_vect_to_string(ve: &Vec<&str>) -> String {
         temp.push_str(ve[i]);
         temp.push_str(" ");
     }
-    return temp
+    return temp;
 }
 
 fn convert_solved_to_string(solv: Vec<&str>) -> String {
@@ -17,11 +17,17 @@ fn convert_solved_to_string(solv: Vec<&str>) -> String {
     let mut solv_clone = solv.clone();
     solv_clone.remove(0);
     temp.push_str(&convert_vect_to_string(&solv_clone));
-    return temp
+    return temp;
 }
 
 #[tauri::command]
-async fn check_guess(guess: &str, selected: Vec<&str>, _gotten: Vec<Vec<&str>>, word_list: Vec<&str>) -> Result<String,String> {
+async fn check_guess(
+    model: &str,
+    guess: &str,
+    selected: Vec<&str>,
+    _gotten: Vec<Vec<&str>>,
+    word_list: Vec<&str>,
+) -> Result<String, String> {
     let mut message: String = 
 "Hello! Your a judge filling out form for a game that is like NYT's Connections.
 
@@ -59,8 +65,10 @@ Also, make sure the catagory is very narrow and unique, the catagory can't be ge
 
 Here is the category: '".to_owned();
     message.push_str(guess);
-    message.push_str("'
-Here are the given words: '");
+    message.push_str(
+        "'
+Here are the given words: '",
+    );
     message.push_str(&convert_vect_to_string(&selected));
     message.push_str("'
 Make sure to review the WHOLE group of words. Do not review each word indivualy, look at the whole group.
@@ -79,15 +87,16 @@ And remember to start your form filled out with a 'True. ' or a 'False. '! Thank
 Please have fun!");
 
     let data = json!({
-        "model": "llama3.2",
+        "model": model,
         "prompt": message,
         "stream": false,
     });
 
-    println!("{}",data);
+    println!("{}", data);
 
     let client = reqwest::Client::new();
-    match client.post("http://localhost:11434/api/generate")
+    match client
+        .post("http://localhost:11434/api/generate")
         .json(&data)
         .send()
         .await
@@ -117,6 +126,7 @@ Please have fun!");
 #[cfg_attr(mobile, tauri::mobile_entry_point)]
 pub fn run() {
     tauri::Builder::default()
+        .plugin(tauri_plugin_store::Builder::new().build())
         .plugin(tauri_plugin_opener::init())
         .invoke_handler(tauri::generate_handler![check_guess])
         .run(tauri::generate_context!())
