@@ -10,7 +10,7 @@ async function getModel() {
 }
 
 function GameScreen() {
-  const wordList: string[] = ["veil","shake","cable","vision","arrange","offspring","fund","ridge","authorize","parade","suffering","impound","bad","concentration","slippery","artichoke"];
+  const wordList: string[] = ["extra","ball","won","mug","pin","copy","too","tee","ate","spare","pen","lane","alley","tote","for","backup"];
   const [selected, setSelected] = useState<(string)[]>([]);
   const [model, setModel] = useState<string>("");
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);

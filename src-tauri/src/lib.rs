@@ -29,62 +29,43 @@ async fn check_guess(
     word_list: Vec<&str>,
 ) -> Result<String, String> {
     let mut message: String = 
-"Hello! Your a judge filling out form for a game that is like NYT's Connections.
+"
+# IDENTITY and PURPOSE
 
-You first need to look at the submitted category, then check if the four submitted words fit the category.
+You are an expert content judge for word puzzles. You take data from a game in and output a  formatted response using the format below.
 
-IMPORTANT, please follow this format to answer:
+Take a deep breath and think step by step about how to best accomplish this goal using the following steps.
 
-The first word MUST be either a 'True' or a 'False', followed by a '. ' the period and the space are IMPORTANT
+# OUTPUT FORMAT
 
-Answer 'True. ' if the all of the words fit in the given category
-Example of true response:
-  True. the submitted words appear to be related to a common category, particularly 'word', as they seem unrelated in terms of meaning or context
-Answer 'False. ' if one (or more) of the words does not fit in the given category
-Example of false response:
-  False. the submitted words do not appear to be related to a common category, particularly 'word', as they seem unrelated in terms of meaning or context
+- Based off of your instructions start your response with either 'True. ' or 'False. '.
 
-Next give a less than 50 character concise passive voiced reason for you answer, make it ONE sentence
-Example of short response:
-  False. All words work, exept for 'word,' 'word' does not fit catagory because of 'reason.'
+- Then explain your reasoning in around 25 words.
 
-Please use only plain text in your response
+# OUTPUT INSTRUCTIONS
 
-Thanks!
+- Create the output using the formatting above.
+- You only output human readable plain text.
+- You will receive a category that the words *should* fit in, titled 'Catagory: '
+- You will receive a list of four words in your input, titled 'Word list: '
+- Then determine if the four words objectively fit in the input category
+- Make sure the category is unique, ex: 'All words end with an E', not general, ex: 'Positive words'
+- You will also receive a list of 16 words, called 'Word bank: '
+- Make sure the category doesn't apply to more than the four given words
+- Then if the input is valid, start your response with 'True. ' else use 'False. '
+# INPUT:
 
-Here is an example of an example catagory: 'driving terms'
-Here is an example of submitted words that fit the catagory: 'signal turn brake merge'
-If the user submitted: 'signal turn brake carrot'
-That wouldn't work because carrot is not a driving term.
-
-Make sure the given words fit in the catagory, and make sure the reasononing is objective, not subjective.
-For example, the catorgory: 'The words sound funny'
-Wouldn't work because the fact if the words sound funny is subjective
-
-Also, make sure the catagory is very narrow and unique, the catagory can't be general like: 'The words sound funny'
-
-Here is the category: '".to_owned();
+INPUT:
+Catagory: '".to_owned();
     message.push_str(guess);
-    message.push_str(
-        "'
-Here are the given words: '",
-    );
+    message.push_str("'
+Word list: '");
     message.push_str(&convert_vect_to_string(&selected));
     message.push_str("'
-Make sure to review the WHOLE group of words. Do not review each word indivualy, look at the whole group.
-
-Now, look at the full list of words the player can submit their words from WARNING THESE WORDS ARE NOT IN BEING SUBMITTED BY THE USER, THEY ARE WORDS THE USER CAN PULL TO CREATE THEIR GROUPS FROM: '");
+Word bank: 
+'");
     message.push_str(&convert_vect_to_string(&word_list));
-    message.push_str("'
-Please examine the full list of words, make sure the given words are the ONLY ones to fit the given catagory of out of the full word list.
-
-This means that you should only review the given words and the given catorgory. BUT you should also check the word list to make sure the GIVEN words are unique, and the ONLY WORDS to fit in given catagory.
-
-For example, if the example catagory is: 'The words are positive'
-
-And remember to start your form filled out with a 'True. ' or a 'False. '! Thanks!
-
-Please have fun!");
+    message.push_str("'");
 
     let data = json!({
         "model": model,

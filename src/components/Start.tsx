@@ -30,6 +30,7 @@ function Start() {
   }, []);
 
   function onSubmit() {
+    console.log("test")
     console.log(model);
     writeModel(model);
 
@@ -37,7 +38,7 @@ function Start() {
   }
 
   return <>
-    <button onSubmit={(e) => onSubmit()}>clock me</button>
+    <button onClick={(e) => onSubmit()}>clock me</button>
     <input value={model} onChange={(e) => {setModel(e.target.value)}}></input>
   </>
 }
