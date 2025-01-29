@@ -73,14 +73,14 @@ function GameScreen() {
         startIndex = falseIndex;
     } 
     
+    console.log(msg);
+
     msg = msg.substring(startIndex);
     msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z]*$/, "").toLowerCase().trim();
     let words: string[] = msg.split(' ');
     let result: string = words[0];
     result = result.replace(/[".]/g, '');
     msg = words.slice(1).join(' ');
-
-    console.log(msg);
 
     if (result.toLowerCase() == "true") {
       let temp = [...blocks];
