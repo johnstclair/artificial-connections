@@ -48,14 +48,20 @@ Take a deep breath and think step by step about how to best accomplish this goal
 - You only output human readable plain text.
 - You will receive a category that the words *should* fit in, titled 'Catagory: '
 - You will receive a list of four words in your input, titled 'Word list: '
+- IGNORE the input labled 'Word bank: ' for now
 - Then determine if the four words objectively fit in the narrow category
 - Make sure the category is narrow - only encimpassing a specific set of words, ex: 'All words at types of candy'. Make sure the catagory is not general, ex: 'Positive words'
 - Make sure the catagory isn't subjective, ex: 'The words sound funny' is invalid
-- If the the full word list fits the catagory then the input is valid at this point
-- You will also receive a list of 16 words, called 'Word bank: '
+
+- ONLY DO THIS SECTION IF THE WORD LIST AND CATAGORY IS VALID AT THIS POINT
+- Now look at your word bank, you will also have receive a list of 16 words, called 'Word bank: '
+- The word bank is where the word list words come from
 - If more words in the word bank than just the words in the word list fit in the catagory, the catagory is invalid 
-- Then if the word list and catagory is valid, start your response with 'True. ' else use 'False. '
-- Be sceptical, the input should only be valid if the catagory is very strong, the input is only valid around 50%
+    - This is because the catagory is not specific enough to encompass just the words in the word list
+
+- If the word list fits the catagory and is valid, start your response with 'True. ' else use 'False. '
+
+- Remember, be sceptical, their should only be a valid if the catagory fits very very well with the word list, the input should only be valid in around 50% of cases
 
 # INPUT:
 
