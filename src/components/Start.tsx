@@ -19,7 +19,7 @@ async function writeModel(model: string) {
 
 
 function Start() {
-  const [model, setModel] = useState<string>("llama3.1");
+  const [model, setModel] = useState<string>("deepseek-r1:8b");
 
   const navigate = useNavigate();
 
