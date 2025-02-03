@@ -64,6 +64,8 @@ function GameScreen() {
 
     let msg: string = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
 
+    msg = msg.substring(msg.indexOf("</think>") + 8);
+    msg = msg.substring(msg.indexOf("Final Answer") + 12);
     const trueIndex = msg.indexOf("True.");
     const falseIndex = msg.indexOf("False.");
     let startIndex;
@@ -73,7 +75,6 @@ function GameScreen() {
         startIndex = falseIndex;
     } 
     
-    console.log(msg);
 
     msg = msg.substring(startIndex);
     msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z]*$/, "").toLowerCase().trim();

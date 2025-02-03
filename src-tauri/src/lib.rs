@@ -41,7 +41,7 @@ It doesn't matter if you take your time, just make sure the final answer is accu
 
 - Based off of your instructions start your response with either 'True. ' or 'False. '.
 
-- Then explain your reasoning in around 20 words.
+- Then explain your reasoning on your answer in around 20 words.
 
 # OUTPUT INSTRUCTIONS
 
@@ -64,8 +64,8 @@ It doesn't matter if you take your time, just make sure the final answer is accu
    - Verify that all four words in the word list fit the category criteria.
 
 3. **Specificity Validation:**
-   - The category should include no more than four words from the word bank to be considered valid.
-   - This means only four out of the sixteen words should fit in the category.
+   - The category should include NO MORE than four words from the word bank to be considered valid.
+   - This means exactly four out of the sixteen words should fit in the category.
 
 - If the input is valid, start your response with 'True. ' else use 'False. '
 
