@@ -40,8 +40,9 @@ It doesn't matter if you take your time, just make sure the final answer is accu
 # OUTPUT FORMAT
 
 - Based off of your instructions start your response with either 'True. ' or 'False. '.
-
 - Then explain your reasoning on your answer in around 20 words.
+
+- ONLY GIVE ONE RESPONSE!!
 
 # OUTPUT INSTRUCTIONS
 

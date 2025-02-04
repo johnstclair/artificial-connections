@@ -67,7 +67,7 @@ function GameScreen() {
   }
 
   async function handleSubmit() {
-    if (selected.length != 4) {
+    if (selected.length != 4 || guess.length <= 3) {
       return;
     }
 
