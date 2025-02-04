@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useCallback, useState, useEffect } from "react";
 import { load } from '@tauri-apps/plugin-store';
 import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
@@ -19,8 +19,19 @@ function GameScreen() {
 
   const [guess, setGuess] = useState<string>("");
   const [notification, setNotification] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
+
+  const llmCallback = useCallback(async () => {
+    setLoading(true)
+    console.log("loading");
+    await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList }).then((result) => {
+      setLoading(false);
+      console.log("pre thing",result)
+      return result
+    });
+  });
 
   if (life == 0) {
     navigate("/");
@@ -62,7 +73,7 @@ function GameScreen() {
       return;
     }
 
-    let msg: string = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
+    let msg: string = await llmCallback();
 
     msg = msg.substring(msg.indexOf("</think>") + 8);
     msg = msg.substring(msg.indexOf("Final Answer") + 12);
@@ -75,7 +86,6 @@ function GameScreen() {
         startIndex = falseIndex;
     } 
     
-
     msg = msg.substring(startIndex);
     msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z]*$/, "").toLowerCase().trim();
     let words: string[] = msg.split(' ');
@@ -162,6 +172,7 @@ function GameScreen() {
       <button onClick={() => handleShuffle()}>SHUFFLE</button>
       <button onClick={() => handleDeselect()}>DESELECT</button>
       <h1>{notification}</h1>
+      {loading ? <h1>thinking</h1> : <h1>not thinking</h1>}
   </>
   );
 }
