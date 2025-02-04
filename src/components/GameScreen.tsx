@@ -2,6 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { load } from '@tauri-apps/plugin-store';
 import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
+import { ToastContainer, toast } from 'react-toastify';
 
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
@@ -88,7 +89,7 @@ function GameScreen() {
     } 
     
     msg = msg.substring(startIndex);
-    msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z]*$/, "").toLowerCase().trim();
+    msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z"]*$/, "").toLowerCase().trim();
     let words: string[] = msg.split(' ');
     let result: string = words[0];
     result = result.replace(/[".]/g, '');
@@ -120,7 +121,7 @@ function GameScreen() {
     }
 
     setGuess("");
-    setNotification(msg);
+    toast(msg);
   }
 
   function handleDeselect() {
@@ -150,6 +151,18 @@ function GameScreen() {
 
   return (
   <>
+      <ToastContainer 
+        position="top-middle"
+        hideProgressBar={true}
+        newestOnTop={false}
+        closeOnClick={true}
+        rtl={false}
+        pauseOnFocusLoss
+        draggable
+        pauseOnHover
+        theme="light"
+        transition={Bounce}
+      />
       {gotten.map((row, index) => {
         return <div key={index} className={`solved number${index}`}>
           <h3>{row[0]}</h3>
