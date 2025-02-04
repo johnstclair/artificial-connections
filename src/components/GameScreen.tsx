@@ -26,11 +26,9 @@ function GameScreen() {
   const llmCallback = useCallback(async () => {
     setLoading(true)
     console.log("loading");
-    await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList }).then((result) => {
-      setLoading(false);
-      console.log("pre thing",result)
-      return result
-    });
+    let data = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList })
+    setLoading(false);
+    return data
   });
 
   if (life == 0) {
