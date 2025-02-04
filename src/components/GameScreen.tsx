@@ -2,7 +2,7 @@ import { useCallback, useState, useEffect } from "react";
 import { load } from '@tauri-apps/plugin-store';
 import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
-import { ToastContainer, toast } from 'react-toastify';
+import { ToastContainer, Slide, toast } from 'react-toastify';
 
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
@@ -77,8 +77,12 @@ function GameScreen() {
 
     let msg: string = await llmCallback();
 
-    msg = msg.substring(msg.indexOf("</think>") + 8);
-    msg = msg.substring(msg.indexOf("Final Answer") + 12);
+    if (msg.indexOf("</think>") != -1) {
+      msg = msg.substring(msg.indexOf("</think>") + 8)
+    };
+    if (msg.indexOf("Final Answer") != -1) {
+      msg = msg.substring(msg.indexOf("Final Answer") + 12)
+    };
     const trueIndex = msg.indexOf("True.");
     const falseIndex = msg.indexOf("False.");
     let startIndex;
@@ -89,7 +93,7 @@ function GameScreen() {
     } 
     
     msg = msg.substring(startIndex);
-    msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").replace(/[^a-zA-Z"]*$/, "").toLowerCase().trim();
+    msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").slice(0, -1).toLowerCase().trim();
     let words: string[] = msg.split(' ');
     let result: string = words[0];
     result = result.replace(/[".]/g, '');
@@ -151,17 +155,18 @@ function GameScreen() {
 
   return (
   <>
-      <ToastContainer 
-        position="top-middle"
-        hideProgressBar={true}
-        newestOnTop={false}
-        closeOnClick={true}
+      <ToastContainer
+        position="top-center"
+        autoClose={99999999}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
         rtl={false}
         pauseOnFocusLoss
-        draggable
-        pauseOnHover
-        theme="light"
-        transition={Bounce}
+        draggable={false}
+        pauseOnHover={false}
+        theme="dark"
+        transition={Slide}
       />
       {gotten.map((row, index) => {
         return <div key={index} className={`solved number${index}`}>
