@@ -18,9 +18,9 @@ button {
 }
   
 .button-grid {
-  padding-top: 16%;
+  padding-top: 2vh;
   font-family: 'Fjalla One';
-  padding-bottom: 16%;
+  padding-bottom: 2vh;
   border-radius: 8px;
   font-weight: 900;
   font-size: 2.2vw;
@@ -32,14 +32,14 @@ button {
 }
 
 .life-dot {
-  background: #202020;
+  background: #5A594E;
   border-radius: 25px;
   width: 30px;
   height: 30px;
 }
 
 .selected {
-  background: #020100;
+  background: #5A594E;
   color: #EFEEE6;
 }
 
