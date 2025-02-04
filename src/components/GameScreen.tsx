@@ -25,8 +25,7 @@ function GameScreen() {
 
   const llmCallback = useCallback(async () => {
     setLoading(true)
-    console.log("loading");
-    let data = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList })
+    let data = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
     setLoading(false);
     return data
   });
@@ -48,6 +47,10 @@ function GameScreen() {
   }, []);
 
   function handleSelection(index: number) {
+    if (loading) {
+      return
+    }
+
     if (!blocks[index][1] && selected.length < 4) {
       let temp = [...blocks];
       temp[index][1] = !temp[index][1];
@@ -67,7 +70,7 @@ function GameScreen() {
   }
 
   async function handleSubmit() {
-    if (selected.length != 4 || guess.length <= 3) {
+    if (selected.length != 4 || guess.length <= 3 || loading) {
       return;
     }
 
