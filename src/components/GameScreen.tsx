@@ -27,6 +27,7 @@ function GameScreen() {
   const llmCallback = useCallback(async () => {
     setLoading(true)
     let data = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
+    console.log(data);
     setLoading(false);
     return data
   });
@@ -71,6 +72,7 @@ function GameScreen() {
   }
 
   async function handleSubmit() {
+    setGuess(guess.replace(/'/g, ""));
     if (selected.length != 4 || guess.length <= 3 || loading) {
       return;
     }
@@ -157,11 +159,10 @@ function GameScreen() {
   <>
       <ToastContainer
         position="top-center"
-        autoClose={99999999}
+        autoClose={20000}
         hideProgressBar
         newestOnTop
         closeOnClick
-        rtl={false}
         pauseOnFocusLoss
         draggable={false}
         pauseOnHover={false}
