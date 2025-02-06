@@ -11,19 +11,25 @@ button {
   border: none;
 }
 
+.box-container {
+  background: #FF00FF;
+  width: 100%;
+  max-width: 700px;
+}
+
 .button-grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1vw;
+  gap: 1%;
 }
   
 .button-grid {
-  padding-top: 2vh;
+  padding-top: 20%;
   font-family: 'Fjalla One';
-  padding-bottom: 2vh;
+  padding-bottom: 20%;
   border-radius: 8px;
   font-weight: 900;
-  font-size: 2.2vw;
+  font-size: min(3vw,22px);
 }
 
 .life{
@@ -40,7 +46,7 @@ button {
 
 .selected {
   background: #5A594E;
-  color: #EFEEE6;
+  color: #F8F8F8;
 }
 
 .solved {

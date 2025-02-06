@@ -169,18 +169,20 @@ function GameScreen() {
         theme="dark"
         transition={Slide}
       />
-      {gotten.map((row, index) => {
-        return <div key={index} className={`solved number${index}`}>
-          <h3>{row[0]}</h3>
-          <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
-        </div>
-      })}
-      <div className="button-grid-container">
-        {blocks.map((item, index) => {
-          return <button key={index} onClick={() => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
-            {item[0].toUpperCase()}
-          </button>
+      <div className="box-container">
+        {gotten.map((row, index) => {
+          return <div key={index} className={`solved number${index}`}>
+            <h3>{row[0]}</h3>
+            <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
+          </div>
         })}
+        <div className="button-grid-container">
+          {blocks.map((item, index) => {
+            return <button key={index} onClick={() => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
+              {item[0].toUpperCase()}
+            </button>
+          })}
+        </div>
       </div>
       <div className="life">
         {Array.apply(0,Array(life)).map((x,i) => {
