@@ -184,10 +184,13 @@ function GameScreen() {
           })}
         </div>
       </div>
+      <div className="life-container">
+      <p>Mistakes Remaining:</p>
       <div className="life">
         {Array.apply(0,Array(life)).map((x,i) => {
             return <div key={i} className="life-dot"></div>
         })}
+      </div>
       </div>
       <button onClick={() => handleSubmit()}>SUBMIT</button>
       <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>

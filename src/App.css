@@ -14,7 +14,9 @@ button {
 .box-container {
   background: #FF00FF;
   width: 100%;
+  min-width: 400px;
   max-width: 700px;
+  margin-inline: auto;
 }
 
 .button-grid-container {
@@ -32,16 +34,31 @@ button {
   font-size: min(3vw,22px);
 }
 
+.life-container {
+  background: #FFFF00;
+  margin-inline: auto;
+  margin-top: min(40px,5%);
+  width: min(40%,400px);
+}
+
+.life-container p {
+  float: left;
+  font-size: min(max(3vw,15px),25px);
+  margin: 0;
+}
+
 .life{
   display: grid;
   grid-template-columns: repeat(4,1fr);
+  width: 30%;
 }
 
 .life-dot {
   background: #5A594E;
   border-radius: 25px;
-  width: 30px;
-  height: 30px;
+  width: min(25px,3vw);
+  height: min(25px,3vw);
+
 }
 
 .selected {
