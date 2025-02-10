@@ -3,7 +3,7 @@ import { load } from '@tauri-apps/plugin-store';
 import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
 import { ToastContainer, Slide, toast } from 'react-toastify';
-
+import { readTextFileLines, BaseDirectory } from '@tauri-apps/plugin-fs';
 
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
@@ -11,8 +11,19 @@ async function getModel() {
   return val.value
 }
 
+async function getWordbank() {
+  const lines = await readTextFileLines('level/random.txt', {
+    baseDir: BaseDirectory.AppConfig,
+  });
+  for await (const line of lines) {
+    console.log(line);
+  }
+
+  return lines;
+}
+
 function GameScreen() {
-  const wordList: string[] = ["extra","ball","won","mug","pin","copy","too","tee","ate","spare","pen","lane","alley","tote","for","backup"];
+  const [wordList, setWordlist] = useState<string[]>(["extra","ball","won","mug","pin","copy","too","tee","ate","spare","pen","lane","alley","tote","for","backup"]);
   const [selected, setSelected] = useState<(string)[]>([]);
   const [model, setModel] = useState<string>("");
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
@@ -38,6 +49,10 @@ function GameScreen() {
   }
 
   useEffect(() => {
+    getWordbank().then((list) => {
+      setWordlist(list);
+    })
+
     getModel().then((result) => {
       setModel(result)
     });
