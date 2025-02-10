@@ -4,6 +4,7 @@ import { useNavigate } from "react-router-dom";
 import { invoke } from "@tauri-apps/api/core";
 import { ToastContainer, Slide, toast } from 'react-toastify';
 
+
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
   const val = await store.get<{value: string}>('model');
