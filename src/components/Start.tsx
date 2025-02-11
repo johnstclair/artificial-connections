@@ -34,7 +34,7 @@ function Start() {
     console.log(model);
     writeModel(model);
 
-    navigate("/play");
+    navigate("/levels");
   }
 
   return <>
