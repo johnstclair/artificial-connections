@@ -12,18 +12,19 @@ async function getModel() {
 }
 
 async function getWordbank() {
-  const lines = await readTextFileLines('level/random.txt', {
+  const lines = await readTextFileLines('levels/random.txt', {
     baseDir: BaseDirectory.AppConfig,
   });
+  let temp = [];
   for await (const line of lines) {
-    console.log(line);
+    temp.push(line);
   }
 
-  return lines;
+  return temp;
 }
 
 function GameScreen() {
-  const [wordList, setWordlist] = useState<string[]>(["extra","ball","won","mug","pin","copy","too","tee","ate","spare","pen","lane","alley","tote","for","backup"]);
+  const [wordList, setWordlist] = useState<string[]>([]);
   const [selected, setSelected] = useState<(string)[]>([]);
   const [model, setModel] = useState<string>("");
   const [blocks, setBlocks] = useState<(string | boolean)[][]>([]);
@@ -49,19 +50,19 @@ function GameScreen() {
   }
 
   useEffect(() => {
-    getWordbank().then((list) => {
-      setWordlist(list);
-    })
-
     getModel().then((result) => {
       setModel(result)
     });
 
-    let temp: (string | boolean)[][] = [];
-    wordList.map((word) => {
-      temp.push([word,false]);
-    });
-    setBlocks(temp);
+    getWordbank().then((list) => {
+      setWordlist(list);
+      let temp: (string | boolean)[][] = [];
+      list.map((word) => {
+        temp.push([word,false]);
+      });
+      setBlocks(temp);
+    })
+
   }, []);
 
   function handleSelection(index: number) {
