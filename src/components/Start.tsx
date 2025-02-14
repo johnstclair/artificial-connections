@@ -30,8 +30,6 @@ function Start() {
   }, []);
 
   function onSubmit() {
-    console.log("test")
-    console.log(model);
     writeModel(model);
 
     navigate("/levels");

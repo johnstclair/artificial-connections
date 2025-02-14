@@ -5,14 +5,20 @@ import { invoke } from "@tauri-apps/api/core";
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { readTextFileLines, BaseDirectory } from '@tauri-apps/plugin-fs';
 
+async function getLevel() {
+  const store = await load('settings.json', { autoSave: false });
+  const val = await store.get<{value: string}>('level');
+  return val.value
+}
+
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
   const val = await store.get<{value: string}>('model');
   return val.value
 }
 
-async function getWordbank() {
-  const lines = await readTextFileLines('levels/Premade Level.txt', {
+async function getWordbank(level: string) {
+  const lines = await readTextFileLines(`levels/${level}.txt`, {
     baseDir: BaseDirectory.AppData,
   });
   let temp = [];
@@ -54,15 +60,18 @@ function GameScreen() {
       setModel(result)
     });
 
-    getWordbank().then((list) => {
-      setWordlist(list);
-      let temp: (string | boolean)[][] = [];
-      list.map((word) => {
-        temp.push([word,false]);
-      });
-      setBlocks(temp);
-    })
+    getLevel().then((result) => {
+      const level = result;
 
+      getWordbank(level).then((list) => {
+        setWordlist(list);
+        let temp: (string | boolean)[][] = [];
+        list.map((word) => {
+          temp.push([word,false]);
+        });
+        setBlocks(temp);
+      });
+    });
   }, []);
 
   function handleSelection(index: number) {

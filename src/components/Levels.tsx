@@ -1,7 +1,8 @@
-import { useEffect } from "react";
+import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { exists, mkdir, writeTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
+import { exists, mkdir, writeTextFile, readDir, BaseDirectory } from '@tauri-apps/plugin-fs';
 import { generate } from "random-words";
+import { load } from '@tauri-apps/plugin-store';
 
 async function writeCurated() {
   const curatedExists = await exists('levels/Premade Level.txt', {
@@ -28,7 +29,6 @@ async function writeRandom() {
   let temp: string[] = generate(16);
   let contents = "";
   temp.map((item) => {
-    console.log(item);
     contents += item + "\n";
   });
 
@@ -37,17 +37,47 @@ async function writeRandom() {
   });
 }
 
+async function readLevels() {
+  return await readDir('levels', { baseDir: BaseDirectory.AppData });
+}
+
+async function writeLevel(level: string) {
+  const store = await load('settings.json', { autoSave: false });
+  await store.set('level', { value: level } );
+  const val = await store.get<{value: string}>('level');
+  await store.save();
+}
+
 function Levels() {
+  const [levels, setLevels] = useState<string[]>(["random"]);
+  const [selectedLevel, setSelectedLevel] = useState<string>("random");
   const navigate = useNavigate();
 
   useEffect(() => {
     writeRandom();
     writeCurated();
+    readLevels().then((result) => {
+      let temp: string[] = [];
+      result.map((item) => {
+        temp.push(item.name.replace(/\.txt$/, ""));
+      });
+      setLevels(temp);
+    })
   }, [])
+
+  const onSubmit = (() => {
+    writeLevel(selectedLevel);
+    navigate("/play");
+  })
 
   return <>
     <p>level select</p>
-    <button onClick={() => navigate("/play")}>play</button>
+    <select id="levelSelect" onChange={(e) => setSelectedLevel(e.target.value)}>
+      {levels.map((item, index) => {
+        return <option value={item} key={index}>{item}</option>
+      })}
+    </select>
+    <button onClick={() => onSubmit()}>play</button>
   </>
 } 
 
