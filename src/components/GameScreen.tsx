@@ -13,7 +13,7 @@ async function getModel() {
 
 async function getWordbank() {
   const lines = await readTextFileLines('levels/random.txt', {
-    baseDir: BaseDirectory.AppConfig,
+    baseDir: BaseDirectory.AppData,
   });
   let temp = [];
   for await (const line of lines) {
