@@ -3,6 +3,18 @@ import { useNavigate } from "react-router-dom";
 import { exists, mkdir, writeTextFile, BaseDirectory } from '@tauri-apps/plugin-fs';
 import { generate } from "random-words";
 
+async function writeCurated() {
+  const curatedExists = await exists('levels/Premade Level.txt', {
+    baseDir: BaseDirectory.AppData,
+  });
+  if (!curatedExists) { 
+    const contents = "extra\nball\nwon\nmug\npin\ncopy\ntoo\ntee\nate\nspare\npen\nlane\nalley\ntote\nfor\nbackup";
+    await writeTextFile('levels/Premade Level.txt', contents, {
+      baseDir: BaseDirectory.AppData,
+    });
+  }
+}
+
 async function writeRandom() {
   const levelsExist = await exists('levels', {
     baseDir: BaseDirectory.AppData,
@@ -30,6 +42,7 @@ function Levels() {
 
   useEffect(() => {
     writeRandom();
+    writeCurated();
   }, [])
 
   return <>

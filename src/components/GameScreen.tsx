@@ -12,7 +12,7 @@ async function getModel() {
 }
 
 async function getWordbank() {
-  const lines = await readTextFileLines('levels/random.txt', {
+  const lines = await readTextFileLines('levels/Premade Level.txt', {
     baseDir: BaseDirectory.AppData,
   });
   let temp = [];
