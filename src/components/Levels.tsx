@@ -61,6 +61,7 @@ function Levels() {
       result.map((item) => {
         temp.push(item.name.replace(/\.txt$/, ""));
       });
+      temp.splice(temp.indexOf("random"),1);
       setLevels(temp);
     })
   }, [])
@@ -73,6 +74,7 @@ function Levels() {
   return <>
     <p>level select</p>
     <select id="levelSelect" onChange={(e) => setSelectedLevel(e.target.value)}>
+      <option value="random">random</option>
       {levels.map((item, index) => {
         return <option value={item} key={index}>{item}</option>
       })}

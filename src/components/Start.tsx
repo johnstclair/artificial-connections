@@ -39,6 +39,7 @@ function Start() {
     <button onClick={(e) => onSubmit()}>clock me</button>
     <input value={model} onChange={(e) => {setModel(e.target.value)}}></input>
     <button onClick={(e) => navigate("/instructions")}>learn to play</button>
+    <button onClick={(e) => navigate("/manager")}>manage levels</button>
   </>
 }
 export default Start;
