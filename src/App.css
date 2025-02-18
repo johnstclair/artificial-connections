@@ -6,9 +6,12 @@
 }
 
 button {
-  background: #EFEEE6;
+  background: rgba(1,1,1,0);
   color: #020100;
-  border: none;
+  border: 2px #5A594E solid;
+  border-radius: 40px;
+  margin: 1%;
+  padding: 3%;
 }
 
 .box-container {
@@ -30,6 +33,8 @@ button {
   font-family: 'Fjalla One';
   padding-bottom: 20%;
   border-radius: 8px;
+  border: 0px;
+  margin: 0%;
   font-weight: 900;
   font-size: min(3vw,22px);
 }
