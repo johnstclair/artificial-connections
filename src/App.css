@@ -18,6 +18,13 @@ button {
   font-weight: 550;
 }
 
+.middle-div {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .box-container {
   background: #FF00FF;
   width: 100%;
@@ -54,6 +61,8 @@ select {
   margin: 0%;
   font-weight: 900;
   font-size: min(3vw,22px);
+  overflow: hidden;
+  white-space: nowrap;
 }
 
 .life-container {

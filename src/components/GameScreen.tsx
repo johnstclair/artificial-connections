@@ -218,11 +218,13 @@ function GameScreen() {
         })}
       </div>
       </div>
-      <button onClick={() => handleSubmit()}>SUBMIT</button>
-      <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
-      <button onClick={() => handleShuffle()}>SHUFFLE</button>
-      <button onClick={() => handleDeselect()}>DESELECT</button>
-      <h1>{notification}</h1>
+      <div className="middle-div">
+        <button onClick={() => handleSubmit()}>SUBMIT</button>
+        <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
+        <button onClick={() => handleShuffle()}>SHUFFLE</button>
+        <button onClick={() => handleDeselect()}>DESELECT</button>
+        <h1>{notification}</h1>
+      </div>
       {loading ? <h1>thinking</h1> : <h1>not thinking</h1>}
   </>
   );
