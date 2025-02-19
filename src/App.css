@@ -1,17 +1,21 @@
 @import url('https://fonts.googleapis.com/css2?family=Fjalla+One');
+@import url('https://fonts.googleapis.com/css2?family=Roboto');
 
 :root {
   padding: 0;
   margin: 0;
+  font-family: 'Roboto';
 }
 
 button {
   background: rgba(1,1,1,0);
-  color: #020100;
-  border: 2px #5A594E solid;
+  color: #000000;
+  border: 1px #000000 solid;
   border-radius: 40px;
-  margin: 1%;
-  padding: 3%;
+  margin: 10px;
+  padding: 15px;
+  font-size: 12px;
+  font-weight: 550;
 }
 
 .box-container {
@@ -27,8 +31,21 @@ button {
   grid-template-columns: repeat(4, 1fr);
   gap: 1%;
 }
+
+input {
+  border-radius: 40px;
+  border: 1px #000000 solid;
+  height: 26px;
+  padding: 8px;
+}
+
+select {
+  border-radius: 40px;
+  height: 44px;
+}
   
 .button-grid {
+  background: #EFEFE6;
   padding-top: 20%;
   font-family: 'Fjalla One';
   padding-bottom: 20%;
@@ -37,10 +54,6 @@ button {
   margin: 0%;
   font-weight: 900;
   font-size: min(3vw,22px);
-}
-
-.levelCreateForm {
-
 }
 
 .life-container {

@@ -28,9 +28,9 @@ async function writeRandom() {
 
   let temp: string[] = generate(16);
   let contents = "";
-  temp.map((item) => {
-    contents += item + "\n";
-  });
+  for (let i = 0; i < 16; i++) {
+    contents += temp[i] + "\n";
+  }
 
   await writeTextFile('levels/random.txt', contents, {
     baseDir: BaseDirectory.AppData,
