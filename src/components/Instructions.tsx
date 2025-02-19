@@ -4,7 +4,9 @@ function Instructions() {
   const navigate = useNavigate();
 
   return (
-  <button onClick={() => navigate("/")}>back to home</button>
+  <div className="middle-div">
+    <button onClick={() => navigate("/")}>Back To Home</button>
+  </div>
   );
 }
 

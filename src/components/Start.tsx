@@ -36,10 +36,15 @@ function Start() {
   }
 
   return <>
-    <button onClick={(e) => onSubmit()}>clock me</button>
-    <input value={model} onChange={(e) => {setModel(e.target.value)}}></input>
-    <button onClick={(e) => navigate("/instructions")}>learn to play</button>
-    <button onClick={(e) => navigate("/manager")}>manage levels</button>
+    <div className="name">
+      <h3>Artificial Connections</h3>
+    </div>
+    <div className="middle-div vertical-align">
+      <button onClick={(e) => onSubmit()}>Start</button>
+      <input value={model} onChange={(e) => {setModel(e.target.value)}}></input>
+      <button onClick={(e) => navigate("/instructions")}>Learn To Play</button>
+      <button onClick={(e) => navigate("/manager")}>Manage Levels</button>
+    </div>
   </>
 }
 export default Start;

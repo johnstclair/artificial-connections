@@ -40,6 +40,7 @@ function GameScreen() {
   const [guess, setGuess] = useState<string>("");
   const [notification, setNotification] = useState("");
   const [loading, setLoading] = useState(false);
+  const [canSubmit, setCanSubmit] = useState<boolean>(false);
 
   const navigate = useNavigate();
 
@@ -97,9 +98,21 @@ function GameScreen() {
     }
   }
 
-  async function handleSubmit() {
+
+  useEffect(() => {
+    setCanSubmit(canSubmitCheck());
+  })
+
+  function canSubmitCheck() {
     setGuess(guess.replace(/'/g, ""));
     if (selected.length != 4 || guess.length <= 3 || loading) {
+      return false;
+    }
+    return true;
+  }
+
+  async function handleSubmit() {
+    if (!canSubmit) {
       return;
     }
 
@@ -195,6 +208,9 @@ function GameScreen() {
         theme="dark"
         transition={Slide}
       />
+      <div className="middle-div">
+        <p>Create groups of four and a catagory to go along!</p>
+      </div>
       <div className="box-container">
         {gotten.map((row, index) => {
           return <div key={index} className={`solved number${index}`}>
@@ -210,22 +226,23 @@ function GameScreen() {
           })}
         </div>
       </div>
-      <div className="life-container">
-      <p>Mistakes Remaining:</p>
-      <div className="life">
-        {Array.apply(0,Array(life)).map((x,i) => {
-            return <div key={i} className="life-dot"></div>
-        })}
-      </div>
+      <div className="middle-div">
+        <div className="life-container">
+          <p>Mistakes Remaining:</p>
+          <div className="life">
+            {Array.apply(0,Array(life)).map((x,i) => {
+                return <div key={i} className="life-dot"></div>
+            })}
+          </div>
+        </div>
       </div>
       <div className="middle-div">
-        <button onClick={() => handleSubmit()}>SUBMIT</button>
+        <button className={(!canSubmit || loading) ? "deactivated" : ""} onClick={() => handleSubmit()}>Submit</button>
         <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
-        <button onClick={() => handleShuffle()}>SHUFFLE</button>
-        <button onClick={() => handleDeselect()}>DESELECT</button>
+        <button onClick={() => handleShuffle()}>Shuffle</button>
+        <button className={selected.length == 0 ? "deactivated" : ""} onClick={() => handleDeselect()}>Deselect</button>
         <h1>{notification}</h1>
       </div>
-      {loading ? <h1>thinking</h1> : <h1>not thinking</h1>}
   </>
   );
 }

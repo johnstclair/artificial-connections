@@ -8,14 +8,14 @@
 }
 
 button {
-  background: rgba(1,1,1,0);
   color: #000000;
+  font-size: 14px;
+  font-weight: 500;
+  background: rgba(1,1,1,0);
   border: 1px #000000 solid;
   border-radius: 40px;
-  margin: 10px;
+  margin: 0px;
   padding: 15px;
-  font-size: 12px;
-  font-weight: 550;
 }
 
 .middle-div {
@@ -25,8 +25,21 @@ button {
   align-items: center;
 }
 
+.vertical-align {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50rem;
+}
+
+.name {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
 .box-container {
-  background: #FF00FF;
   width: 100%;
   min-width: 400px;
   max-width: 700px;
@@ -36,29 +49,37 @@ button {
 .button-grid-container {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
-  gap: 1%;
+  gap: 7px;
+}
+
+h3 {
+  font-size: 30px;
+  font-weight: 550;
 }
 
 input {
+  color: #000000;
+  font-size: 14px;
+  font-weight: 500;
   border-radius: 40px;
   border: 1px #000000 solid;
-  height: 26px;
+  height: 28px;
   padding: 8px;
 }
 
 select {
   border-radius: 40px;
-  height: 44px;
+  height: 46px;
 }
   
 .button-grid {
   background: #EFEFE6;
+  color: #151515;
   padding-top: 20%;
   font-family: 'Fjalla One';
   padding-bottom: 20%;
   border-radius: 8px;
   border: 0px;
-  margin: 0%;
   font-weight: 900;
   font-size: min(3vw,22px);
   overflow: hidden;
@@ -66,29 +87,31 @@ select {
 }
 
 .life-container {
-  background: #FFFF00;
-  margin-inline: auto;
-  margin-top: min(40px,5%);
-  width: min(40%,400px);
+  width: 40%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 8px;
 }
 
 .life-container p {
-  float: left;
-  font-size: min(max(3vw,15px),25px);
-  margin: 0;
+  margin-top: 18px;
+  font-size: 15px;
+  color: #706F66;
 }
 
 .life{
+  margin-left: 10px;
   display: grid;
   grid-template-columns: repeat(4,1fr);
-  width: 30%;
+  width: 80px;
 }
 
 .life-dot {
   background: #5A594E;
   border-radius: 25px;
-  width: min(25px,3vw);
-  height: min(25px,3vw);
+  width: 15px;
+  height: 15px;
 
 }
 
@@ -97,11 +120,15 @@ select {
   color: #F8F8F8;
 }
 
+.deactivated {
+  border: #979797 1px solid;
+  color: #979797;
+}
+
 .solved {
-  padding: 1%;
+  padding: 5px;
   font-family: 'Fjalla One';
-  margin-top: 1%;
-  margin-bottom: 1%;
+  margin-bottom: 6px;
   border-radius: 8px;
 }
 

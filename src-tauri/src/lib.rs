@@ -34,7 +34,7 @@ async fn check_guess(
 
 You are an expert content judge for word puzzles. You take data from a game in and output a formatted response using the format below.
 
-Take a deep breath and think step by step about how to best accomplish this goal using the following steps.
+Take a deep breath and think through step by step about how to best accomplish this goal using the following steps.
 
 # OUTPUT FORMAT
 
@@ -42,7 +42,7 @@ Take a deep breath and think step by step about how to best accomplish this goal
 
 - Then explain your reasoning in less than 15 words -- IMPORTANT.
 
-- Please limit yourself to one response, ONLY ONE.
+- Limit yourself to one response which NEEDS to be less than 15 words.
 
 # OUTPUT INSTRUCTIONS
 

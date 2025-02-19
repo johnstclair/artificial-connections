@@ -73,15 +73,19 @@ function Levels() {
   })
 
   return <>
-    <p>level select</p>
-    <select id="levelSelect" onChange={(e) => setSelectedLevel(e.target.value)}>
-      <option value="random">random</option>
-      <option value="Premade Level">Premade Level</option>
-      {levels.map((item, index) => {
-        return <option value={item} key={index}>{item}</option>
-      })}
-    </select>
-    <button onClick={() => onSubmit()}>play</button>
+    <div className="name">
+      <h3>Select a level</h3>
+    </div>
+    <div className="middle-div vertical-align">
+      <select id="levelSelect" onChange={(e) => setSelectedLevel(e.target.value)}>
+        <option value="random">random</option>
+        <option value="Premade Level">Premade Level</option>
+        {levels.map((item, index) => {
+          return <option value={item} key={index}>{item}</option>
+        })}
+      </select>
+      <button onClick={() => onSubmit()}>Play</button>
+    </div>
   </>
 } 
 
