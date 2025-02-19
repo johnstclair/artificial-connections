@@ -14,7 +14,8 @@ button {
   background: rgba(1,1,1,0);
   border: 1px #000000 solid;
   border-radius: 40px;
-  margin: 0px;
+  margin-left: 7px;
+  margin-right: 7px;
   padding: 15px;
 }
 
@@ -52,13 +53,23 @@ button {
   gap: 7px;
 }
 
+.instructions {
+  margin-top: 15px;
+  margin-left: 15vw;
+  margin-right: 15vw;
+  text-align: center;
+}
+
 h3 {
+  font-family: 'Fjalla One';
   font-size: 30px;
   font-weight: 550;
 }
 
 input {
-  color: #000000;
+  margin-left: 7px;
+  margin-right: 7px;
+  color: #606060;
   font-size: 14px;
   font-weight: 500;
   border-radius: 40px;
@@ -68,12 +79,15 @@ input {
 }
 
 select {
+  margin-right: 7px;
+  margin-left: 7px;
   border-radius: 40px;
   height: 46px;
 }
   
 .button-grid {
   background: #EFEFE6;
+  margin: 0px;
   color: #151515;
   padding-top: 20%;
   font-family: 'Fjalla One';
@@ -125,6 +139,17 @@ select {
   color: #979797;
 }
 
+.activated {
+  background: #121212;
+  color: #F8F8F8;
+  transition-duration: 0.2s;
+}
+
+.activated:hover {
+  background: #5A5A5A;
+
+}
+
 .solved {
   padding: 5px;
   font-family: 'Fjalla One';
@@ -133,24 +158,25 @@ select {
 }
 
 .solved.number0{
-  background: yellow;
+  background: #F9DF6D;
 }
 
 .solved.number1{
-  background: green;
+  background: #A0C35A;
 }
 
 .solved.number2{
-  background: blue;
+  background: #B0C4EF;
 }
 
 .solved.number3{
-  background: purple;
+  background: #BB81C5;
 }
 
 p {
   margin-top: 0;
-  font-size: 2vw;
+  font-size: min(15px,max(8px,2vw));
+  font-family: 'Roboto';
 }
 
 h3 {

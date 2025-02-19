@@ -41,7 +41,7 @@ function Start() {
     </div>
     <div className="middle-div vertical-align">
       <button onClick={(e) => onSubmit()}>Start</button>
-      <input value={model} onChange={(e) => {setModel(e.target.value)}}></input>
+      <input placeholder="Model" value={model} onChange={(e) => {setModel(e.target.value)}}></input>
       <button onClick={(e) => navigate("/instructions")}>Learn To Play</button>
       <button onClick={(e) => navigate("/manager")}>Manage Levels</button>
     </div>

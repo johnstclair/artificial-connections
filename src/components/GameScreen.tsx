@@ -237,8 +237,8 @@ function GameScreen() {
         </div>
       </div>
       <div className="middle-div">
-        <button className={(!canSubmit || loading) ? "deactivated" : ""} onClick={() => handleSubmit()}>Submit</button>
-        <input value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
+        <button className={(!canSubmit || loading) ? "deactivated" : "activated"} onClick={() => handleSubmit()}>Submit</button>
+        <input placeholder="Catagory" value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
         <button onClick={() => handleShuffle()}>Shuffle</button>
         <button className={selected.length == 0 ? "deactivated" : ""} onClick={() => handleDeselect()}>Deselect</button>
         <h1>{notification}</h1>

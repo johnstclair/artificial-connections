@@ -28,6 +28,8 @@ function LevelManager() {
       result.map((item) => {
         temp.push(item.name.replace(/\.txt$/, ""));
       });
+      temp.splice(temp.indexOf("random"),1);
+      temp.splice(temp.indexOf("Premade Level"),1);
       setLevels(temp);
     })
   }, []);
@@ -47,8 +49,11 @@ function LevelManager() {
   }
 
   return (<>
+    <div className="name">
+      <h3>Level Manager</h3>
+    </div>
     <textarea className="levelCreateForm" value={text} onChange={(e) => {setText(e.target.value)}}></textarea>
-    <input value={name} onChange={(e) => {setName(e.target.value)}}></input>
+    <input placeholder="Level Name" value={name} onChange={(e) => {setName(e.target.value)}}></input>
     <button onClick={() => createLevel()}>create level</button>
     {levels.map((item, index) => {
       return <><button key={index} onClick={() => deleteFile(item)}>delete {item}</button><br/></>
