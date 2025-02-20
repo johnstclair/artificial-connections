@@ -94,7 +94,7 @@ select {
   padding-bottom: 20%;
   border-radius: 8px;
   border: 0px;
-  font-weight: 900;
+  font-weight: 500;
   font-size: min(3vw,22px);
   overflow: hidden;
   white-space: nowrap;
@@ -151,10 +151,15 @@ select {
 }
 
 .solved {
-  padding: 5px;
+  padding: 6px;
   font-family: 'Fjalla One';
   margin-bottom: 6px;
+  text-align: center;
   border-radius: 8px;
+}
+
+.solved h3 {
+  font-size: min(22px,max(3vw,12px));
 }
 
 .solved.number0{

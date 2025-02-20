@@ -155,7 +155,7 @@ function GameScreen() {
       second[currentIndex].push(guess);
 
       selected.map((s) => {
-        second[currentIndex].push(s);
+        second[currentIndex].push(s.toUpperCase());
       })
 
       setGotten(second);
@@ -215,7 +215,7 @@ function GameScreen() {
         {gotten.map((row, index) => {
           return <div key={index} className={`solved number${index}`}>
             <h3>{row[0]}</h3>
-            <p>{`${row[1]} ${row[2]} ${row[3]} ${row[4]}`}</p>
+            <p>{`${row[1]}, ${row[2]}, ${row[3]}, ${row[4]}`}</p>
           </div>
         })}
         <div className="button-grid-container">
