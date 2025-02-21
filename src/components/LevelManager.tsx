@@ -1,5 +1,6 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
+import { ToastContainer, Slide, toast } from 'react-toastify';
 import { remove, writeTextFile, readDir, BaseDirectory } from '@tauri-apps/plugin-fs';
 
 async function writeFile(name: string, contents: string) {
@@ -44,9 +45,15 @@ function LevelManager() {
       temp.push(item);
     });
 
-    if (temp.length != 16 || temp.indexOf("") != -1) return;
+    if (temp.length != 16 || temp.indexOf("") != -1) {
+      toast("Word list not formatted correctly");
+      return;
+    };
     console.log("length good");
-    if (name == "") return;
+    if (name.trim() == "") {
+      toast("Please enter a name with the correct formatting");
+      return;
+    };
     console.log("name good");
 
     writeFile(name, text);
@@ -59,6 +66,18 @@ function LevelManager() {
   }
 
   return (<>
+      <ToastContainer
+        position="top-center"
+        autoClose={5000}
+        hideProgressBar
+        newestOnTop
+        closeOnClick
+        pauseOnFocusLoss
+        draggable={false}
+        pauseOnHover={false}
+        theme="dark"
+        transition={Slide}
+      />
     <div className="name">
       <h3>Level Manager</h3>
     </div>
@@ -73,7 +92,7 @@ function LevelManager() {
       </div>
       <div className="column">
         {levels.map((item, index) => {
-          return <><button key={index} onClick={() => delFile(item)}>delete {item}</button><br/></>
+          return <><button className="delete-button" key={index} onClick={() => delFile(item)}>X</button>{item}<br/></>
         })}
       </div>
     </div>

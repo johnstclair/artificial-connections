@@ -33,6 +33,10 @@ button {
   height: 50rem;
 }
 
+.delete-button {
+  margin: 5px;
+}
+
 .name {
   width: 100%;
   display: flex;
