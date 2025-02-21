@@ -22,7 +22,7 @@ function LevelManager() {
   const [levels, setLevels] = useState<string[]>([""]);
   const navigate = useNavigate();
 
-  useEffect(() => {
+  function read() {
     readLevels().then((result) => {
       let temp: string[] = [];
       result.map((item) => {
@@ -32,6 +32,10 @@ function LevelManager() {
       temp.splice(temp.indexOf("Premade Level"),1);
       setLevels(temp);
     })
+  }
+
+  useEffect(() => {
+    read();
   }, []);
 
   function createLevel() {
@@ -46,20 +50,36 @@ function LevelManager() {
     console.log("name good");
 
     writeFile(name, text);
+    read();
+  }
+
+  function delFile(name: string) {
+    deleteFile(name);
+    read();
   }
 
   return (<>
     <div className="name">
       <h3>Level Manager</h3>
     </div>
-    <textarea className="levelCreateForm" value={text} onChange={(e) => {setText(e.target.value)}}></textarea>
-    <input placeholder="Level Name" value={name} onChange={(e) => {setName(e.target.value)}}></input>
-    <button onClick={() => createLevel()}>create level</button>
-    {levels.map((item, index) => {
-      return <><button key={index} onClick={() => deleteFile(item)}>delete {item}</button><br/></>
-
-    })}
-    <button onClick={() => navigate("/")}>back</button>
+    <div className="columns">
+      <div className="column">
+        <textarea className="levelCreateForm" value={text} onChange={(e) => {setText(e.target.value)}}></textarea>
+        <br/>
+        <div className="middle-div">
+          <input placeholder="Level Name" value={name} onChange={(e) => {setName(e.target.value)}}></input>
+          <button onClick={() => createLevel()}>Create Level</button>
+        </div>
+      </div>
+      <div className="column">
+        {levels.map((item, index) => {
+          return <><button key={index} onClick={() => delFile(item)}>delete {item}</button><br/></>
+        })}
+      </div>
+    </div>
+    <div className="middle-div">
+      <button onClick={() => navigate("/")}>Back</button>
+    </div>
   </>)
 }
 

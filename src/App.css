@@ -150,6 +150,15 @@ select {
 
 }
 
+.columns {
+  margin: 10px;
+  display: flex;
+}
+
+.column {
+  width: 50%;
+}
+
 .solved {
   padding: 6px;
   font-family: 'Fjalla One';
