@@ -108,6 +108,7 @@ function GameScreen() {
 
   function canSubmitCheck() {
     setGuess(guess.replace(/'/g, ""));
+    setGuess(guess.slice(0,40))
     if (selected.length != 4 || guess.length <= 3 || loading) {
       return false;
     }
@@ -218,7 +219,7 @@ function GameScreen() {
       <div className="box-container">
         {gotten.map((row, index) => {
           return <div key={index} className={`solved number${index}`}>
-            <h3>{row[0]}</h3>
+            <h3>{row[0].toUpperCase()}</h3>
             <p>{`${row[1]}, ${row[2]}, ${row[3]}, ${row[4]}`}</p>
           </div>
         })}
