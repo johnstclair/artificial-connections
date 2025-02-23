@@ -10,7 +10,7 @@ fn convert_vect_to_string(ve: &Vec<&str>) -> String {
     return temp;
 }
 
-fn convert_solved_to_string(solv: Vec<&str>) -> String {
+fn _convert_solved_to_string(solv: Vec<&str>) -> String {
     let mut temp: String = "Catagory: ".to_owned();
     temp.push_str(solv[0]);
     temp.push_str("\nItems: ");
