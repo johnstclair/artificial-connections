@@ -101,6 +101,9 @@ function GameScreen() {
 
   useEffect(() => {
     setCanSubmit(canSubmitCheck());
+    if (gotten.length == 4) {
+      navigate("/win");
+    }
   })
 
   function canSubmitCheck() {
@@ -117,6 +120,7 @@ function GameScreen() {
     }
 
     let msg: string = await llmCallback();
+    console.log(msg);
 
     if (msg.indexOf("</think>") != -1) {
       msg = msg.substring(msg.indexOf("</think>") + 8)

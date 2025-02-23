@@ -19,6 +19,10 @@ button {
   padding: 15px;
 }
 
+button:hover {
+  cursor: pointer;
+}
+
 .middle-div {
   width: 100%;
   display: flex;
@@ -34,7 +38,10 @@ button {
 }
 
 .delete-button {
-  margin: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  border: 1px #0A0A0A solid;
+  border-radius: 50px;
 }
 
 .name {
@@ -64,6 +71,19 @@ button {
   text-align: center;
 }
 
+.delete-words {
+  vertical-align: middle;
+}
+
+h4 {
+  font-family: 'Fjalla One';
+  font-size: 22px;
+  font-weight: 550;
+  text-align: center;
+  margin: 0;
+  margin-bottom: 10px;
+}
+
 h3 {
   font-family: 'Fjalla One';
   font-size: 30px;
@@ -87,6 +107,18 @@ select {
   margin-left: 7px;
   border-radius: 40px;
   height: 46px;
+}
+
+textarea {
+  width: 100%;
+  height: 350px;
+  box-sizing: border-box;
+  border: 1px solid #0A0A0A;
+  border-radius: 10px;
+  padding: 8px;
+  font-size: 16px;
+  margin-bottom: 10px;
+  resize: none;
 }
   
 .button-grid {

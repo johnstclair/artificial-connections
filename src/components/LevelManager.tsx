@@ -83,7 +83,8 @@ function LevelManager() {
     </div>
     <div className="columns">
       <div className="column">
-        <textarea className="levelCreateForm" value={text} onChange={(e) => {setText(e.target.value)}}></textarea>
+        <h4>Level Create</h4>
+        <textarea placeholder='Go to the "Learn to Play" to learn how to format a level' className="levelCreateForm" value={text} onChange={(e) => {setText(e.target.value)}}></textarea>
         <br/>
         <div className="middle-div">
           <input placeholder="Level Name" value={name} onChange={(e) => {setName(e.target.value)}}></input>
@@ -91,8 +92,9 @@ function LevelManager() {
         </div>
       </div>
       <div className="column">
+        <h4>Delete Files</h4>
         {levels.map((item, index) => {
-          return <><button className="delete-button" key={index} onClick={() => delFile(item)}>X</button>{item}<br/></>
+          return <><button className="delete-button" key={index} onClick={() => delFile(item)}></button><span className="delete-words">{item}</span><br/></>
         })}
       </div>
     </div>
