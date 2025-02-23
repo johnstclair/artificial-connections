@@ -1,6 +1,6 @@
 # Artificial Connections
 
-Just like the NYTimes connections game, just with an AI twist.
+Just like the New York Times connections game, just with an AI twist.
 
 You need [Ollama](https://ollama.com/) to play, DeepSeek-R1:8B is recommended, other models, such as Qwen2.5:7B or smaller versions of DeepSeek-R1 will work, but won't be as consitant or enjoyable. 
 
