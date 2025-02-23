@@ -25,3 +25,7 @@ I created this project to see how far local LLM's have come since I messed with 
 Using a powerful reasoning model, such as Deepseek-R1, will yeild you the best results, but the gameplay can still be inconsitant.
 
 That is to say, Artificial Connections is more of a proof of concept, rather than a polished game. Either way, it's at least somewhat entertaining, so please enjoy!
+
+## Help Wanted
+
+If your a Senior Proompt Engineering and your able to create a better prompt than what I made, found [here](https://github.com/johnstclair/artificial-connections/blob/main/src-tauri/src/lib.rs), than please create a PR, any contributions are welcomed.
