@@ -5,6 +5,8 @@ import { invoke } from "@tauri-apps/api/core";
 import { ToastContainer, Slide, toast } from 'react-toastify';
 import { readTextFileLines, BaseDirectory } from '@tauri-apps/plugin-fs';
 
+import "./Loading.css";
+
 async function getLevel() {
   const store = await load('settings.json', { autoSave: false });
   const val = await store.get<{value: string}>('level');
@@ -55,7 +57,7 @@ function GameScreen() {
     console.log(data);
     setLoading(false);
     return data
-  });
+  }, []);
 
   if (life == 0) {
     navigate("/");
@@ -252,6 +254,11 @@ function GameScreen() {
         <button onClick={() => handleShuffle()}>Shuffle</button>
         <button className={selected.length == 0 ? "deactivated" : ""} onClick={() => handleDeselect()}>Deselect</button>
       </div>
+      {
+      loading ? <div className="middle-div">
+        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+      </div> : <></>
+      }
   </>
   );
 }
