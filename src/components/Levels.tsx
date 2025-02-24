@@ -26,7 +26,7 @@ async function writeRandom() {
     });
   }
 
-  let temp: string[] = generate(16);
+  let temp: string[] | string = generate(16);
   let contents = "";
   for (let i = 0; i < 16; i++) {
     contents += temp[i] + "\n";
@@ -44,7 +44,6 @@ async function readLevels() {
 async function writeLevel(level: string) {
   const store = await load('settings.json', { autoSave: false });
   await store.set('level', { value: level } );
-  const val = await store.get<{value: string}>('level');
   await store.save();
 }
 

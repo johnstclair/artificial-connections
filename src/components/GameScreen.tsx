@@ -8,13 +8,19 @@ import { readTextFileLines, BaseDirectory } from '@tauri-apps/plugin-fs';
 async function getLevel() {
   const store = await load('settings.json', { autoSave: false });
   const val = await store.get<{value: string}>('level');
-  return val.value
+  if (val != undefined) {
+    return val.value
+  }
+  return "random"
 }
 
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
   const val = await store.get<{value: string}>('model');
-  return val.value
+  if (val != undefined) {
+    return val.value
+  }
+  return "deepseek-r1:8b"
 }
 
 async function getWordbank(level: string) {
@@ -38,7 +44,6 @@ function GameScreen() {
   const [life, setLife] = useState<number>(4);
 
   const [guess, setGuess] = useState<string>("");
-  const [notification, setNotification] = useState("");
   const [loading, setLoading] = useState(false);
   const [canSubmit, setCanSubmit] = useState<boolean>(false);
 
@@ -246,7 +251,6 @@ function GameScreen() {
         <input placeholder="Catagory" value={guess} onChange={(e) => {setGuess(e.target.value)}}></input>
         <button onClick={() => handleShuffle()}>Shuffle</button>
         <button className={selected.length == 0 ? "deactivated" : ""} onClick={() => handleDeselect()}>Deselect</button>
-        <h1>{notification}</h1>
       </div>
   </>
   );

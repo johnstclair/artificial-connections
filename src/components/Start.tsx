@@ -1,4 +1,3 @@
-import { Link } from "react-router-dom";
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { load } from '@tauri-apps/plugin-store';
@@ -6,7 +5,10 @@ import { load } from '@tauri-apps/plugin-store';
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
   const val = await store.get<{value: string}>('model');
-  return val.value
+  if (val != undefined) {
+    return val.value
+  }
+  return "deepseek-r1:8b"
 }
 
 async function writeModel(model: string) {
@@ -40,10 +42,10 @@ function Start() {
       <h3>Artificial Connections</h3>
     </div>
     <div className="middle-div vertical-align">
-      <button onClick={(e) => onSubmit()}>Start</button>
+      <button onClick={() => onSubmit()}>Start</button>
       <input placeholder="Model" value={model} onChange={(e) => {setModel(e.target.value)}}></input>
-      <button onClick={(e) => navigate("/instructions")}>Learn To Play</button>
-      <button onClick={(e) => navigate("/manager")}>Manage Levels</button>
+      <button onClick={() => navigate("/instructions")}>Learn To Play</button>
+      <button onClick={() => navigate("/manager")}>Manage Levels</button>
     </div>
   </>
 }
