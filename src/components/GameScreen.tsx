@@ -54,7 +54,6 @@ function GameScreen() {
   const llmCallback = useCallback(async () => {
     setLoading(true)
     let data = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
-    console.log(data);
     setLoading(false);
     return data
   }, []);
@@ -93,7 +92,7 @@ function GameScreen() {
 
       setSelected([
         ...selected,
-        temp[index][0]
+        temp[index][0].toString()
       ]);
     } else if (blocks[index][1]) {
       let temp = [...blocks];
@@ -127,7 +126,7 @@ function GameScreen() {
       return;
     }
 
-    let msg: string = await llmCallback();
+    let msg: string = await llmCallback().toString();
     console.log(msg);
 
     if (msg.indexOf("</think>") != -1) {
@@ -144,8 +143,10 @@ function GameScreen() {
     } else if (falseIndex !== -1) {
         startIndex = falseIndex;
     } 
-    
-    msg = msg.substring(startIndex);
+   
+    if (startIndex != undefined) {
+      msg = msg.substring(startIndex);
+    }
     msg = msg.replace(/\\n/g, " ").replace(/\\/g, "").slice(0, -1).toLowerCase().trim();
     let words: string[] = msg.split(' ');
     let result: string = words[0];
@@ -233,7 +234,7 @@ function GameScreen() {
         <div className="button-grid-container">
           {blocks.map((item, index) => {
             return <button key={index} onClick={() => handleSelection(index)} className={`button-grid ${item[1] ? "selected" : ""}`}>
-              {item[0].toUpperCase()}
+              {item[0].toString().toUpperCase()}
             </button>
           })}
         </div>
@@ -242,7 +243,7 @@ function GameScreen() {
         <div className="life-container">
           <p>Mistakes Remaining:</p>
           <div className="life">
-            {Array.apply(0,Array(life)).map((x,i) => {
+            {Array.apply(0,Array(life)).map((_x,i) => {
                 return <div key={i} className="life-dot"></div>
             })}
           </div>
@@ -256,7 +257,7 @@ function GameScreen() {
       </div>
       {
       loading ? <div className="middle-div">
-        <div class="lds-ring"><div></div><div></div><div></div><div></div></div>
+        <div className="lds-ring"><div></div><div></div><div></div><div></div></div>
       </div> : <></>
       }
   </>
