@@ -56,7 +56,7 @@ function GameScreen() {
     let data = await invoke('check_guess', { model: model, guess: guess, selected: selected, gotten: gotten, wordList: wordList });
     setLoading(false);
     return data
-  }, []);
+  }, [selected, guess, gotten, model, wordList]);
 
   if (life == 0) {
     navigate("/");
@@ -89,7 +89,6 @@ function GameScreen() {
     if (!blocks[index][1] && selected.length < 4) {
       let temp = [...blocks];
       temp[index][1] = !temp[index][1];
-
       setSelected([
         ...selected,
         temp[index][0].toString()
@@ -126,8 +125,7 @@ function GameScreen() {
       return;
     }
 
-    let msg: string = await llmCallback().toString();
-    console.log(msg);
+    let msg = await llmCallback() as string;
 
     if (msg.indexOf("</think>") != -1) {
       msg = msg.substring(msg.indexOf("</think>") + 8)
