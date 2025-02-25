@@ -10,7 +10,7 @@ All other instructions are in game.
 
 ### Prebuilt binaries
 
-Coming soon.
+Prebulit executables for Linux, macOS, and Windows, download them from the releases page.
 
 ### Building from source
 
