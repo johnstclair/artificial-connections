@@ -31,7 +31,7 @@ async function getWordbank(level: string) {
   });
   let temp = [];
   for await (const line of lines) {
-    temp.push(line.trim());
+    temp.push(line.replace(/\0/g, ''));
   }
 
   return temp;
@@ -136,7 +136,7 @@ function GameScreen() {
     const trueIndex = msg.indexOf("True.");
     const falseIndex = msg.indexOf("False.");
     let startIndex;
-    if (trueIndex !== -1 && (falseIndex === -1 || trueIndex < falseIndex)) {
+    if (trueIndex !== -1 && (falseIndex === -1 || trueIndex < falseIndex)) {game
         startIndex = trueIndex;
     } else if (falseIndex !== -1) {
         startIndex = falseIndex;
