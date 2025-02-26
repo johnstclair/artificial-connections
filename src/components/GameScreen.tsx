@@ -136,7 +136,7 @@ function GameScreen() {
     const trueIndex = msg.indexOf("True.");
     const falseIndex = msg.indexOf("False.");
     let startIndex;
-    if (trueIndex !== -1 && (falseIndex === -1 || trueIndex < falseIndex)) {game
+    if (trueIndex !== -1 && (falseIndex === -1 || trueIndex < falseIndex)) {
         startIndex = trueIndex;
     } else if (falseIndex !== -1) {
         startIndex = falseIndex;
