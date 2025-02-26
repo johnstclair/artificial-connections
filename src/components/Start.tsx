@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { load } from '@tauri-apps/plugin-store';
+import { exists, mkdir, BaseDirectory } from '@tauri-apps/plugin-fs';
 
 async function getModel() {
   const store = await load('settings.json', { autoSave: false });
@@ -15,10 +16,19 @@ async function writeModel(model: string) {
   const store = await load('settings.json', { autoSave: false });
   await store.set('model', { value: model } );
   const val = await store.get<{value: string}>('model');
-  console.log(val);
   await store.save();
 }
 
+async function createBasedir() {
+  const dirExists = await exists('', {
+    baseDir: BaseDirectory.AppData,
+  });
+  if (!dirExists) { 
+    await mkdir('', {
+      baseDir: BaseDirectory.AppData,
+    });
+  }
+}
 
 function Start() {
   const [model, setModel] = useState<string>("deepseek-r1:8b");
@@ -26,6 +36,7 @@ function Start() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    createBasedir();
     getModel().then((result) => {
       setModel(result)
     });

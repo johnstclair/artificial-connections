@@ -31,7 +31,7 @@ async function getWordbank(level: string) {
   });
   let temp = [];
   for await (const line of lines) {
-    temp.push(line);
+    temp.push(line.trim());
   }
 
   return temp;

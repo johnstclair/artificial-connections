@@ -49,12 +49,10 @@ function LevelManager() {
       toast("Word list not formatted correctly");
       return;
     };
-    console.log("length good");
     if (name.trim() == "") {
       toast("Please enter a name with the correct formatting");
       return;
     };
-    console.log("name good");
 
     writeFile(name, text);
     read();

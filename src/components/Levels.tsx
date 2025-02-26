@@ -8,7 +8,7 @@ async function writeCurated() {
   const curatedExists = await exists('levels/Premade Level.txt', {
     baseDir: BaseDirectory.AppData,
   });
-  if (!curatedExists) { 
+  if(!curatedExists) { 
     const contents = "extra\nball\nwon\nmug\npin\ncopy\ntoo\ntee\nate\nspare\npen\nlane\nalley\ntote\nfor\nbackup";
     await writeTextFile('levels/Premade Level.txt', contents, {
       baseDir: BaseDirectory.AppData,
@@ -17,15 +17,6 @@ async function writeCurated() {
 }
 
 async function writeRandom() {
-  const levelsExist = await exists('levels', {
-    baseDir: BaseDirectory.AppData,
-  });
-  if (!levelsExist) { 
-    await mkdir('levels', {
-      baseDir: BaseDirectory.AppData,
-    });
-  }
-
   let temp: string[] | string = generate(16);
   let contents = "";
   for (let i = 0; i < 16; i++) {
@@ -35,6 +26,17 @@ async function writeRandom() {
   await writeTextFile('levels/random.txt', contents, {
     baseDir: BaseDirectory.AppData,
   });
+}
+
+async function createLevels() {
+  const levelsExist = await exists('levels', {
+    baseDir: BaseDirectory.AppData,
+  });
+  if (!levelsExist) { 
+    await mkdir('levels', {
+      baseDir: BaseDirectory.AppData,
+    });
+  }
 }
 
 async function readLevels() {
@@ -53,8 +55,10 @@ function Levels() {
   const navigate = useNavigate();
 
   useEffect(() => {
-    writeRandom();
-    writeCurated();
+    createLevels().then(() => {
+      writeRandom();
+      writeCurated();
+    });
     readLevels().then((result) => {
       let temp: string[] = [];
       result.map((item) => {
